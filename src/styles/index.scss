@@ -1,0 +1,96 @@
+/*  ============
+    Global Styles
+    ============ */
+
+// TODO: remove unused font-weights later
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&family=Raleway:wght@100;200;300;400;600;800&display=swap');
+
+:root {
+  // --main-font: 'Nunito', sans-serif;
+  --main-font: Avenir; // TODO: check if Avennir is working only locally
+  // --secondary-font: ProximaNova;
+  --secondary-font: 'Raleway', sans-serif;
+}
+
+*, *::backdrop, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  font-family: var(--secondary-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #ffffff;
+}
+
+/*  ============
+    Typography
+    ============ */
+h1, h2 {
+  font-weight: 700;
+}
+
+h1 {
+  font-family: var(--main-font);
+  font-size: 2.125em;
+  line-height: 1.29;
+}
+
+h2 {
+  font-family: var(--main-font);
+  font-size: 1em;
+}
+
+h3 {
+  font-size: 0.875em;
+  font-weight: 400;
+}
+
+:root {
+  --p-font-size: 0.5625em;
+}
+
+p {
+  font-size: var(--p-font-size);
+  line-height: 1.56;
+}
+
+/*  ============
+    Layout
+    ============ */
+    /*
+    Breakpoints
+      mobile: width <640
+      tablet: width <800
+      small-desktop: width <960
+      desktop: width >960
+    */
+
+@media only screen and (max-width: 640px) {
+  :root {
+    font-size: calc(16px * 1);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  :root {
+    font-size: calc(16px * 0.7);
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  :root {
+    font-size: calc(16px * 0.85);
+  }
+}
+
+/*  ============
+    Components
+    ============ */
+
+button {
+  font-family: var(--secondary-font);
+  font-size: var(--p-font-size);
+}
