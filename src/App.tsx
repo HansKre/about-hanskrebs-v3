@@ -64,7 +64,7 @@ function App() {
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            padding: '6rem',
+            padding: '7.5vw',
           }}>
             <h1>Welcome</h1>
             <h2>I'm a h2-heading.</h2>
