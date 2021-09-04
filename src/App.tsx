@@ -39,7 +39,7 @@ function App() {
           alignItems='center'
           xs={12}
           sm={6}
-          style={{height: '100%'}}
+          style={{height: '100%'}} /* when stacked, this produces 2 * 100vh, when in row it's 1 * 100vh */
         >
           <img
             src={mainLogo}
@@ -66,11 +66,24 @@ function App() {
             flexDirection: 'column',
             padding: '7.5vw',
           }}>
-            <h1>Welcome</h1>
-            <h2>I'm a h2-heading.</h2>
-            <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet provident, inventore obcaecati iusto soluta quasi alias consequuntur, nobis asperiores tempora mollitia dolorem quae, veniam nulla. Dolore officia aperiam fugit nobis!</h3>
-            <p>hans@hanskrebs.me</p>
-            <button>Subscribe</button>
+            <h1>
+              Hello there 👋, <span>I'm Hans</span>
+            </h1>
+            <h2>
+              Welcome To My About Me Page!
+            </h2>
+            <h3>
+              I am a software architect passionate about <i><label>web development</label></i> and <i><label>frontend desgin</label></i>.
+            </h3>
+            <h3>
+              Besides programming, I enjoy photography 📸, cycling 🚴‍♂️, good wine 🍷 and being outdoor 🌿.
+            </h3>
+            <h3>
+              <i><label>Photography</label></i> naturally complements the eye for detail, lines, composition and proportions.
+              For me, it's about capturing the moment, beauty and wonders of our amazing world while being creative.
+              It's such an amazing art.
+            </h3>
+            <h3>Please feel free to explore some of my creations on this page.</h3>
           </div>
         </Grid>
       </Grid>
