@@ -9,6 +9,13 @@ const MAIN_THEME_COLORS = [
     'rgb(255, 255, 255)',
 ]
 
+/** Material-UI Default Breakpoint Values:
+    xs, extra-small: 0px
+    sm, small: 600px
+    md, medium: 960px
+    lg, large: 1280px
+    xl, extra-large: 1920px
+ */
 const breakpoints = createBreakpoints({});
 declare module "@material-ui/core/styles/createBreakpoints" {
     interface BreakpointOverrides {
@@ -26,12 +33,21 @@ const CustomTheme = createTheme({
         primary: {
             main: MAIN_THEME_COLORS[0],
         },
+        secondary: {
+            main: MAIN_THEME_COLORS[4],
+        },
+    },
+    typography: {
+        fontFamily: [
+            'Nunito', 'sans-serif'
+        ].join()
     },
     // https://material-ui.com/customization/breakpoints/#custom-breakpoints
     breakpoints: {
         values: {
             ...breakpoints.values,
             sm: 640,
+            md: 900,
             avatar: 716
         },
     },
