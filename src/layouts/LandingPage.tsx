@@ -43,7 +43,9 @@ export default function LandingPage() {
                     alt={mainLogo}
                     style={{
                         width: '25rem',
-                        height: '25rem'
+                        height: '25rem',
+                        position: 'relative',
+                        top: '-0.25vw', /* visually align with welcome-text on the right */
                     }} />
             </Grid>
             <Grid
