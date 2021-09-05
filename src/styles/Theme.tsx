@@ -10,7 +10,7 @@ declare module "@material-ui/core/styles/createBreakpoints" {
         md: true;
         lg: true;
         xl: true;
-        phone: true;
+        avatar: true;
     }
 }
 
@@ -20,7 +20,7 @@ const CustomTheme = createTheme({
         values: {
             ...breakpoints.values,
             sm: 640,
-            phone: 765
+            avatar: 716
         },
     },
 });
