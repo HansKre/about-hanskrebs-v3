@@ -1,14 +1,6 @@
 import {Grid} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
 import mainLogo from '../assets/main-logo-400x400.png';
-
-const COLORS = [
-    'rgb(12, 18, 72)',
-    'rgb(178, 178, 178)',
-    'rgb(208, 55, 55)',
-    'rgb(247, 247, 247)',
-    'rgb(255, 255, 255)',
-]
 
 const useStyles = makeStyles({
     fullVh: {
@@ -27,6 +19,8 @@ const useStyles = makeStyles({
  */
 export default function LandingPage() {
     const classes = useStyles();
+    const theme = useTheme();
+
     return (
         <Grid container >
             <Grid
@@ -57,7 +51,7 @@ export default function LandingPage() {
                 sm={6}
                 className={classes.fullVh}
                 style={{
-                    backgroundColor: COLORS[0]
+                    backgroundColor: theme.palette.primary.main,
                 }}
             >
                 <div style={{

@@ -4,14 +4,6 @@ import heroImg from '../assets/IMG_9921_matte_look_1440.jpeg';
 import heroImgMobile from '../assets/IMG_9921_matte_look_avatar.jpeg';
 import useWindowSize from '../hooks/useWindowResize';
 
-const COLORS = [
-    'rgb(12, 18, 72)',
-    'rgb(178, 178, 178)',
-    'rgb(208, 55, 55)',
-    'rgb(247, 247, 247)',
-    'rgb(255, 255, 255)',
-]
-
 const useStyles = makeStyles({
     fullVh: {
         height: '50vh',
@@ -77,7 +69,7 @@ export default function About() {
                 xs={12}
                 className={classes.fullVh}
                 style={{
-                    backgroundColor: COLORS[0]
+                    backgroundColor: theme.palette.primary.main,
                 }}
             >
                 <Grid
