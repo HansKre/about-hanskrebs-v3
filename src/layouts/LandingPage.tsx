@@ -73,6 +73,7 @@ export default function LandingPage() {
                 <nav
                     style={{
                         position: 'absolute',
+                        boxSizing: 'border-box', /* Safari-fix, seems to ignore border-box from root when 'position: absolute' is set */
                         top: 0,
                         width: windowWidth && windowWidth >= theme.breakpoints.values.sm ? '50vw' : '100vw',
                         display: 'flex',
