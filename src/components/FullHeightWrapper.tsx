@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     background: {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        [theme.breakpoints.up('phone')]: {
+        [theme.breakpoints.up('avatar')]: {
             backgroundImage: (props: StyleProps) => {
                 if (props.backgroundImg)
                     return `url(${props.backgroundImg})`;
