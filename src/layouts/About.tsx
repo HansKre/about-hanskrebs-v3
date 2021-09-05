@@ -82,6 +82,7 @@ export default function About() {
                     style={{
                         height: '100%',
                         padding: '7.5vw 7.5vw 1vw 7.5vw',
+                        flexWrap: 'nowrap',
                     }}>
                     <h3>
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed voluptates nostrum sit deleniti molestias magnam, minima harum temporibus nam ullam?
