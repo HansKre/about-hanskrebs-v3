@@ -16,7 +16,6 @@ const useStyles = makeStyles({
   },
   halfVh: {
     height: '25vh',
-    maxHeight: '25vh',
     minHeight: '25vh',
     overflow: 'hidden',
   },
@@ -99,7 +98,7 @@ export default function About() {
             height: '100%',
             padding:
               windowWidth >= theme.breakpoints.values.sm
-                ? '7.5vw 7.5vw 1vw 7.5vw'
+                ? '7.5vw 7.5vw 7.5vw 7.5vw'
                 : '10% 15% 1vw 15%',
             flexWrap: 'nowrap',
           }}
@@ -138,8 +137,8 @@ export default function About() {
             height: '100%',
             padding:
               windowWidth >= theme.breakpoints.values.sm
-                ? '7.5vw 7.5vw 1vw 7.5vw'
-                : '1vw 15% 1vw 15%',
+                ? '7.5vw 7.5vw 7.5vw 7.5vw'
+                : '1vw 15% 7.5vw 15%',
             flexWrap: 'nowrap',
           }}
         >
