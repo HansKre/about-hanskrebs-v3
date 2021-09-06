@@ -16,8 +16,13 @@ export default function Burger() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const scrollTo = (id: string) => {
+    const domEl = document.getElementById(id);
+    domEl?.scrollIntoView({ behavior: 'smooth' });
+  };
+  const handleClose = (id: string) => {
     setAnchorEl(null);
+    scrollTo(id);
   };
 
   return (
@@ -55,10 +60,12 @@ export default function Burger() {
           horizontal: 'right',
         }}
       >
-        <MenuItem onClick={handleClose}>ABOUT</MenuItem>
-        <MenuItem onClick={handleClose}>WORKS</MenuItem>
-        <MenuItem onClick={handleClose}>PHOTOGRAPHY</MenuItem>
-        <MenuItem onClick={handleClose}>CONTACT</MenuItem>
+        <MenuItem onClick={() => handleClose('about')}>ABOUT</MenuItem>
+        <MenuItem onClick={() => handleClose('works')}>WORKS</MenuItem>
+        <MenuItem onClick={() => handleClose('photography')}>
+          PHOTOGRAPHY
+        </MenuItem>
+        <MenuItem onClick={() => handleClose('contact')}>CONTACT</MenuItem>
       </Menu>
     </div>
   );

@@ -101,18 +101,10 @@ export default function LandingPage() {
         >
           {windowWidth >= theme.breakpoints.values.md ? (
             <>
-              <a href='http://' target='_blank' rel='noopener noreferrer'>
-                ABOUT
-              </a>
-              <a href='http://' target='_blank' rel='noopener noreferrer'>
-                WORKS
-              </a>
-              <a href='http://' target='_blank' rel='noopener noreferrer'>
-                PHOTOGRAPHY
-              </a>
-              <a href='http://' target='_blank' rel='noopener noreferrer'>
-                CONTACT
-              </a>
+              <a href='#about'>ABOUT</a>
+              <a href='#works'>WORKS</a>
+              <a href='#photography'>PHOTOGRAPHY</a>
+              <a href='#contact'>CONTACT</a>
             </>
           ) : (
             <Burger />
@@ -134,7 +126,7 @@ export default function LandingPage() {
           }}
         >
           <h1>
-            Hello there 👋, <span>I&apos;m Hans.</span>
+            Hello there 👋, <span>I’m Hans.</span>
           </h1>
           <h1 style={{ marginTop: 0 }}>
             <span>

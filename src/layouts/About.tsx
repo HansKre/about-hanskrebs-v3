@@ -56,7 +56,7 @@ export default function About() {
     );
   }
   return (
-    <Grid container direction='column'>
+    <Grid id='about' container direction='column'>
       {/* ROW 1 */}
       <Grid
         item
