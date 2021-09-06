@@ -84,6 +84,7 @@ export default function LandingPage() {
             boxSizing:
               'border-box' /* Safari-fix, seems to ignore border-box from root when 'position: absolute' is set */,
             top: 0,
+            right: 0 /* Chrome-fix for Windows */,
             width:
               windowWidth >= theme.breakpoints.values.sm ? '50vw' : '100vw',
             display: 'flex',
