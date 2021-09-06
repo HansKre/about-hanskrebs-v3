@@ -105,13 +105,21 @@ export default function About() {
           }}
         >
           <h3>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-            voluptates nostrum sit deleniti molestias magnam, minima harum
-            temporibus nam ullam?
+            Hi there! I’m Hans. I’m a passionate introvert who loves building
+            things with <i className='label'>code</i>.
           </h3>
           <h3>
-            Besides programming, I enjoy photography 📸, cycling 🚴‍♂️, good wine
-            🍷 and being outdoor 🌿.
+            My first experience with programming was when I was 12, but it
+            didn’t last long: I learned Delphi, which is a dialect of Object
+            Pascal programming language and even created a couple of smaller
+            applications like a math exercise program. I lost my free time when
+            Blizzard released Diablo, though 😬
+          </h3>
+          <h3>
+            Years later, I decided to try learning Objective-C to help out in a
+            project that I was working on. It was a radically different
+            experience and I distinctly remember that it started clicking for me
+            and I was programming every moment of my free time again.
           </h3>
         </Grid>
         {/* BOTTOM | RIGHT container */}
@@ -136,12 +144,22 @@ export default function About() {
           }}
         >
           <h3>
-            <i className='label'>Photography</i> naturally complements the eye
-            for detail, lines, composition and proportions. For me, it&apos;s
-            about capturing the moment, beauty and wonders of our amazing world
-            while being creative. It&apos;s such an amazing art.
+            Since then, I completed a degree in computer science and found my
+            true passion in <i className='label'>Front End Development</i> and
+            Software Architecture. I love honing my skills to constantly get
+            better in Javascript, Typescript, CSS and React. Seeing my projects
+            improve with the level of my skills gives me great pleasure.
           </h3>
-          <h3>Please feel free to explore some of my works on this page.</h3>
+          <h3>
+            Besides programming, I enjoy photography 📸, cycling 🚴‍♂️, good wine
+            🍷 and being outdoor 🌿.
+          </h3>
+          <h3>
+            <i className='label'>Photography</i> naturally complements the eye
+            for detail, lines, composition and proportions. For me, it’s about
+            capturing the moment, beauty and wonders of our amazing world while
+            being creative. It’s such an amazing art.
+          </h3>
         </Grid>
       </Grid>
     </Grid>
