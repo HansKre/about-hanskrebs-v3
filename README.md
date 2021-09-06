@@ -120,3 +120,133 @@ From now on, the `picture` element does the heavy lifting for us: if it sees a b
 ## Safari-Fixes
 
 - [Safari Image Size Auto Height CSS](https://stackoverflow.com/questions/10760243/safari-image-size-auto-height-css)
+
+For those who **needs to use height auto** and **parent of image is set to `display: flex`**, this trick will help.
+
+`image { align-self: flex-start; }`
+
+If your parent of image has set flex-direction: column, you need to do this instead.
+
+`image { justify-self: flex-start; }`
+
+## Setup Airbnb Style Guide
+
+- Install VSCode Extensions: **Lint**
+- Install VSCode Extensions: **Prettier**
+- Install packages: `npm i -D eslint prettier eslint-plugin-prettier eslint-config-prettier eslint-plugin-node eslint-config-node`
+- Install `javascript`-version of Airbnb Style Guide: `npx install-peerdeps --dev eslint-config-airbnb`
+  - if this throws a dependency-error, install latest versions of deps manually: `npm i -D eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks`
+- [Optional] Install `typescript`-version of Airbnb Style Guide: [eslint-config-airbnb-typescript](https://www.npmjs.com/package/eslint-config-airbnb-typescript)
+  - Install dependencies:
+  
+  ```bash
+  npm install eslint-config-airbnb-typescript \
+            @typescript-eslint/eslint-plugin@^4.29.3 \
+            @typescript-eslint/parser@^4.29.3 \
+            --save-dev
+  ```
+
+  - Within your ESLint config file:
+
+  ```json
+  extends: [
+    'airbnb',
+  + 'airbnb-typescript'
+  ]
+  ```
+
+  - Configure the ESLint TypeScript parser
+
+  ```json
+  {
+    extends: ['airbnb', 'airbnb-typescript'],
+  + parserOptions: {
+  +   project: './tsconfig.json'
+  + }
+  }
+  ```
+
+- Setup project-local Linting-Rules: `npx eslint --init`
+- Choose `json` for format of config-file
+- In the end, choose **'Airbnb'**-Option, when asked **'Which style guide do you want to follow?'**
+- Changes to `.eslintrc.json`:
+  - In the `extends` property add: `"extends": ["plugin:react/recommended", "airbnb", "plugin:import/react"],`
+  - In the `settings` property add:
+
+  ```json
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  ```
+
+  - Add all installed eslint-plugins from your `package.json`, for example with plugins for `Typescript` and `Cypress`:
+
+  ```json
+  "plugins": [
+          "cypress",
+          "import",
+          "jsx-a11y",
+          "node",
+          "prettier",
+          "react",
+          "react-hooks",
+          "@typescript-eslint"
+      ],
+  ```
+
+- [Optional]: Setup project-local Prettier Rules: Create `.prettierrc`-file in your project-root and add rules in there.
+- [Optional]: Ignoring locally: Create `.prettierignore` in project-root and use `.gitignore`-synthax, i.e. `*.md` to ignore all `markdown` files. Example `.prettierignore`-file:
+
+```.prettierignore
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all Markdown files:
+*.md
+```
+
+- [Optional] Create local `.eslintignore` file, example:
+
+```eslintignore
+!**/.eslintrc*
+node_modules*
+dist
+*.svg
+*.ico
+*.json
+.gitignore
+*.md
+*.log
+*.lock
+```
+
+- Add following settings to `settings.json`:
+
+```json
+"eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "typescriptreact"
+  ]
+```
+
+- Restart VSCode to make sure all linting-errors are properly shown
+- [Optional] Manually lint all folders in project folder and output them to terminal: `npx eslint . --ext .js,.jsx,.ts,.tsx`
+- [Optional] Add linting-script to `package.json` under `scripts`:
+
+```json
+"scripts": {
+  "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+  "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
+}
+```
