@@ -147,7 +147,8 @@ export default function About() {
             true passion in <i className='label'>Front End Development</i> and
             Software Architecture. I love honing my skills to constantly get
             better in Javascript, Typescript, CSS and React. Seeing my projects
-            improve with the level of my skills gives me great pleasure.
+            improve with the level of my skills gives me great pleasure and
+            feels super rewarding to me.
           </h3>
           <h3>
             Besides programming, I enjoy photography 📸, cycling 🚴‍♂️, good wine
