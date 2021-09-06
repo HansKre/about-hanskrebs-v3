@@ -1,4 +1,4 @@
-import {ThemeProvider} from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
 import CustomTheme from './styles/Theme';
 import LandingPage from './layouts/LandingPage';
 import About from './layouts/About';

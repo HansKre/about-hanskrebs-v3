@@ -8,3 +8,18 @@ dist
 *.md
 *.log
 *.lock
+
+# postpone fixing lint-errors in not yet used files
+ProgressiveImgWithFallback.tsx
+ProgressiveImg.tsx
+FullHeightWrapper.tsx
+FrontendWorks.tsx
+Contact.tsx
+AboutMe.tsx
+WebpWithFallback.tsx
+Photography.tsx
+MarginsLeftRight.tsx
+/src/components/LandingPage.tsx
+design/*
+cypress/plugins/index.js
+cypress/support/index.js

@@ -17,11 +17,14 @@
   // --secondary-font: Muli,sans-serif;
 }
 
-*, *::backdrop, *::after {
+*,
+*::backdrop,
+*::after {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   font-family: var(--secondary-font);
   -webkit-font-smoothing: antialiased;
@@ -33,7 +36,8 @@ html, body {
 /*  ============
     Typography
     ============ */
-h1, h2 {
+h1,
+h2 {
   font-family: var(--main-font);
 }
 
@@ -57,7 +61,8 @@ h3 {
   line-height: 1.5em;
 }
 
-p, a {
+p,
+a {
   font-size: var(--min-font-size);
   line-height: 1.56;
 }
@@ -79,13 +84,13 @@ span {
   white-space: nowrap;
 }
 
-label {
+.label {
   background-color: rgb(178, 178, 178);
 }
 /*  ============
     Layout
     ============ */
-    /*
+/*
     Breakpoints
       mobile: width <640
       tablet: width <800
@@ -128,11 +133,12 @@ label {
     Components
     ============ */
 
-button, input {
+button,
+input {
   font-family: var(--secondary-font);
   font-size: var(--min-font-size);
 }
 
 input {
-  background-color:rgb(178, 178, 178);
+  background-color: rgb(178, 178, 178);
 }
