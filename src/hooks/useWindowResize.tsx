@@ -6,9 +6,9 @@ import {useState, useEffect} from 'react';
  */
 export default function useWindowSize() {
     const [windowSize, setWindowSize] = useState({
-        width: undefined,
-        height: undefined,
-    } as {width: number | undefined; height: number | undefined});
+        width: 0,
+        height: 0,
+    } as {width: number; height: number});
     useEffect(() => {
         function handleResize() {
             setWindowSize({

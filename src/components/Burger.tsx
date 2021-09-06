@@ -9,7 +9,7 @@ import useWindowSize from '../hooks/useWindowResize';
 
 export default function Burger() {
     const theme = useTheme();
-    const {width: windowWidth = 0} = useWindowSize();
+    const {width: windowWidth} = useWindowSize();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

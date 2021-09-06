@@ -43,14 +43,14 @@ export default function LandingPage() {
                 alignItems='center'
                 xs={12}
                 sm={6}
-                className={windowWidth && windowWidth >= theme.breakpoints.values.sm ? classes.fullVh : classes.topHalf} /* when stacked, this produces 2 * 100vh, when in row it's 1 * 100vh */
+                className={windowWidth >= theme.breakpoints.values.sm ? classes.fullVh : classes.topHalf} /* when stacked, this produces 2 * 100vh, when in row it's 1 * 100vh */
             >
                 <img
                     src={mainLogo}
                     alt={mainLogo}
                     style={{
-                        width: windowWidth && windowWidth >= theme.breakpoints.values.sm ? '25rem' : '40vh',
-                        height: windowWidth && windowWidth >= theme.breakpoints.values.sm ? '25rem' : '40vh',
+                        width: windowWidth >= theme.breakpoints.values.sm ? '25rem' : '40vh',
+                        height: windowWidth >= theme.breakpoints.values.sm ? '25rem' : '40vh',
                         position: 'relative',
                         top: '-0.25vw', /* visually align with welcome-text on the right */
                     }} />
@@ -62,12 +62,9 @@ export default function LandingPage() {
                 alignItems='center'
                 xs={12}
                 sm={6}
-                className={windowWidth && windowWidth >= theme.breakpoints.values.sm ? classes.fullVh : classes.bottomHalf}
+                className={windowWidth >= theme.breakpoints.values.sm ? classes.fullVh : classes.bottomHalf}
                 style={{
-                    backgroundColor: windowWidth && windowWidth >= theme.breakpoints.values.sm
-                        ? theme.palette.primary.main
-                        // : theme.palette.secondary.main,
-                        : theme.palette.primary.main,
+                    backgroundColor: theme.palette.primary.main,
                 }}
             >
                 <nav
@@ -75,16 +72,16 @@ export default function LandingPage() {
                         position: 'absolute',
                         boxSizing: 'border-box', /* Safari-fix, seems to ignore border-box from root when 'position: absolute' is set */
                         top: 0,
-                        width: windowWidth && windowWidth >= theme.breakpoints.values.sm ? '50vw' : '100vw',
+                        width: windowWidth >= theme.breakpoints.values.sm ? '50vw' : '100vw',
                         display: 'flex',
-                        placeContent: windowWidth && windowWidth >= theme.breakpoints.values.md
+                        placeContent: windowWidth >= theme.breakpoints.values.md
                             ? 'center space-between'
                             : 'center flex-end',
                         alignItems: 'center',
-                        padding: windowWidth && windowWidth >= theme.breakpoints.values.sm ? '1vw 7.5% 0 7.5%' : '1vw 15% 0 15%',
+                        padding: windowWidth >= theme.breakpoints.values.sm ? '1vw 7.5% 0 7.5%' : '1vw 15% 0 15%',
                     }}
                 >
-                    {windowWidth && windowWidth >= theme.breakpoints.values.md
+                    {windowWidth >= theme.breakpoints.values.md
                         ? <>
                             <a href="http://" target="_blank" rel="noopener noreferrer">ABOUT</a>
                             <a href="http://" target="_blank" rel="noopener noreferrer">WORKS</a>
@@ -98,8 +95,8 @@ export default function LandingPage() {
                     display: 'flex',
                     flex: '1 1 100%',
                     flexDirection: 'column',
-                    padding: windowWidth && windowWidth >= theme.breakpoints.values.sm ? '15%' : '0 15% 0', /* don't use vw to avoid padding-overflow! */
-                    ...(windowWidth && windowWidth < theme.breakpoints.values.sm && {
+                    padding: windowWidth >= theme.breakpoints.values.sm ? '15%' : '0 15% 0', /* don't use vw to avoid padding-overflow! */
+                    ...(windowWidth < theme.breakpoints.values.sm && {
                         height: '100%',
                         justifyContent: 'center',
                     }),
@@ -115,6 +112,6 @@ export default function LandingPage() {
                     </h2>
                 </div>
             </Grid>
-        </Grid>
+        </Grid >
     )
 }

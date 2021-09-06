@@ -25,12 +25,12 @@ const useStyles = makeStyles({
 
 export default function About() {
     const classes = useStyles();
-    let windowSize = useWindowSize();
+    let {width: windowWidth} = useWindowSize();
     const theme = useTheme();
 
     function ResponsiveImg() {
         const imgResponsiveStyle = () => {
-            if (windowSize.width && windowSize.width >= theme.breakpoints.values.avatar) {
+            if (windowWidth >= theme.breakpoints.values.avatar) {
                 return {
                     width: '100vw',
                     top: '-13.5vw',
@@ -43,7 +43,7 @@ export default function About() {
                 }
             }
         }
-        const imgLink = windowSize.width && windowSize.width >= theme.breakpoints.values.avatar ? heroImg : heroImgMobile;
+        const imgLink = windowWidth >= theme.breakpoints.values.avatar ? heroImg : heroImgMobile;
         return <img
             src={imgLink}
             alt={imgLink}
@@ -58,7 +58,7 @@ export default function About() {
             <Grid
                 item
                 container
-                justifyContent={windowSize.width && windowSize.width >= theme.breakpoints.values.avatar ? 'flex-start' : 'center'}
+                justifyContent={windowWidth >= theme.breakpoints.values.avatar ? 'flex-start' : 'center'}
                 xs={12}
                 className={classes.fullVh}
             >
@@ -83,10 +83,10 @@ export default function About() {
                     direction='column'
                     xs={12}
                     sm={6}
-                    className={windowSize.width && windowSize.width >= theme.breakpoints.values.sm ? classes.fullVhColumns : classes.halfVh}
+                    className={windowWidth >= theme.breakpoints.values.sm ? classes.fullVhColumns : classes.halfVh}
                     style={{
                         height: '100%',
-                        padding: windowSize.width && windowSize.width >= theme.breakpoints.values.sm
+                        padding: windowWidth >= theme.breakpoints.values.sm
                             ? '7.5vw 7.5vw 1vw 7.5vw'
                             : '10% 15% 1vw 15%',
                         flexWrap: 'nowrap',
@@ -105,10 +105,10 @@ export default function About() {
                     direction='column'
                     xs={12}
                     sm={6}
-                    className={windowSize.width && windowSize.width >= theme.breakpoints.values.sm ? classes.fullVhColumns : classes.halfVh}
+                    className={windowWidth >= theme.breakpoints.values.sm ? classes.fullVhColumns : classes.halfVh}
                     style={{
                         height: '100%',
-                        padding: windowSize.width && windowSize.width >= theme.breakpoints.values.sm
+                        padding: windowWidth >= theme.breakpoints.values.sm
                             ? '7.5vw 7.5vw 1vw 7.5vw'
                             : '1vw 15% 1vw 15%',
                         flexWrap: 'nowrap',
