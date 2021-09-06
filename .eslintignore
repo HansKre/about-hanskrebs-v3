@@ -1,6 +1,7 @@
 !**/.eslintrc*
 node_modules*
 dist
+build
 *.svg
 *.ico
 *.json

@@ -22,7 +22,6 @@
     "cypress",
     "import",
     "jsx-a11y",
-    "node",
     "prettier",
     "react",
     "react-hooks",

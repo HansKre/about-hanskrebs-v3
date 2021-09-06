@@ -133,7 +133,8 @@ If your parent of image has set flex-direction: column, you need to do this inst
 
 - Install VSCode Extensions: **Lint**
 - Install VSCode Extensions: **Prettier**
-- Install packages: `npm i -D eslint prettier eslint-plugin-prettier eslint-config-prettier eslint-plugin-node eslint-config-node`
+- Install packages: `npm i -D eslint prettier eslint-plugin-prettier eslint-config-prettier`
+- [Option] Install plugin and rules for `node`: `npm i -D eslint-plugin-node eslint-config-node`
 - Install `javascript`-version of Airbnb Style Guide: `npx install-peerdeps --dev eslint-config-airbnb`
   - if this throws a dependency-error, install latest versions of deps manually: `npm i -D eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks`
 - [Optional] Install `typescript`-version of Airbnb Style Guide: [eslint-config-airbnb-typescript](https://www.npmjs.com/package/eslint-config-airbnb-typescript)
