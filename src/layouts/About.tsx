@@ -52,6 +52,7 @@ export default function About() {
                 alt={imgLink}
                 style={{
                     position: 'relative',
+                    alignSelf: 'flex-start' /* Safari-fix */,
                     ...imgResponsiveStyle(),
                 }}
             />

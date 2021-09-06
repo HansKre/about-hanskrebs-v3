@@ -116,3 +116,7 @@ From now on, the `picture` element does the heavy lifting for us: if it sees a b
 - We first setup a forwarding with [improvmx.com](https://improvmx.com/), for example: hans@hanskrebs.me shall be forwarded to some private mail.
 - Then, we need to setup the `MX`-records in the `netlify`-console as described in this [guide](https://improvmx.com/guides/netlify/) from improvmx.
 - And that's it! Just note that you can't use this adress for outgoing e-mails.
+
+## Safari-Fixes
+
+- [Safari Image Size Auto Height CSS](https://stackoverflow.com/questions/10760243/safari-image-size-auto-height-css)
