@@ -37,7 +37,8 @@ export default function About() {
       return {
         height: '100%',
         borderRadius: '50%',
-        boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+        boxShadow:
+          '0px 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 2%)',
       };
     };
     const imgLink =
@@ -67,6 +68,9 @@ export default function About() {
         }
         xs={12}
         className={classes.fullVh}
+        style={{
+          backgroundColor: theme.palette.secondary.light,
+        }}
       >
         <ResponsiveImg />
       </Grid>
