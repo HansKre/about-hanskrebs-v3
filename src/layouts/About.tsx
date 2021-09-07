@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import heroImg from '../assets/IMG_9921_matte_look_1440.jpeg';
@@ -25,10 +26,11 @@ export default function About() {
   const classes = useStyles();
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
+  const upAvatar = windowWidth >= theme.breakpoints.values.avatar;
 
   function ResponsiveImg() {
     const imgResponsiveStyle = () => {
-      if (windowWidth >= theme.breakpoints.values.avatar) {
+      if (upAvatar) {
         return {
           width: '100vw',
           top: '-13.5vw',
@@ -41,8 +43,7 @@ export default function About() {
           '0px 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 2%)',
       };
     };
-    const imgLink =
-      windowWidth >= theme.breakpoints.values.avatar ? heroImg : heroImgMobile;
+    const imgLink = upAvatar ? heroImg : heroImgMobile;
     return (
       <img
         src={imgLink}
@@ -61,16 +62,18 @@ export default function About() {
       <Grid
         item
         container
-        justifyContent={
-          windowWidth >= theme.breakpoints.values.avatar
-            ? 'flex-start'
-            : 'center'
-        }
+        justifyContent={upAvatar ? 'flex-start' : 'center'}
         xs={12}
         className={classes.fullVh}
-        style={{
-          backgroundColor: theme.palette.secondary.light,
-        }}
+        style={
+          upAvatar
+            ? { backgroundColor: theme.palette.secondary.light }
+            : {
+                background:
+                  'linear-gradient(0deg, rgba(12,18,72,1) 0%, rgba(200,200,200,1) 50%, rgba(12,18,72,1) 100%)',
+                margin: '-1px 0' /* remove strange white line top and bottom */,
+              }
+        }
       >
         <ResponsiveImg />
       </Grid>
