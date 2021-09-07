@@ -10,12 +10,7 @@ build
 *.log
 *.lock
 
-# postpone fixing lint-errors in not yet used files
-FullHeightWrapper.tsx
-AboutMe.tsx
-Photography.tsx
-MarginsLeftRight.tsx
-/src/components/LandingPage.tsx
+# third-party code
 design/*
 cypress/plugins/index.js
 cypress/support/index.js
