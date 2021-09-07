@@ -2,9 +2,12 @@
 import { useState, useLayoutEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { useTheme } from '@material-ui/core';
 import { CSSStyle } from '../types/types';
 import ProgressiveImgWithFallback from '../components/ProgressiveImgWithFallback';
 import { hoverable } from '../styles/Styles';
+import WorksCard from '../components/WorksCard';
+import useWindowSize from '../hooks/useWindowResize';
 
 const MARGINS_TOP = 200;
 const MARGINS_LEFT_RIGHT = 60;
@@ -60,85 +63,47 @@ export default function FrontendWorks() {
   const flexRowRef = useRef<HTMLDivElement>(null);
   const [flexRowWidth, setWidth] = useState(0);
   const classes = useStyles({ flexRowWidth });
+  const theme = useTheme();
+  const { width: windowWidth } = useWindowSize();
 
   useLayoutEffect(() => {
     setWidth(flexRowRef.current?.offsetWidth || 0);
   }, [flexRowRef]);
 
   return (
-    <>
-      <h1 id='works'>Frontend Works 🔮</h1>
-      <h2>
-        As my preferred techstack I’m using <span>React</span> with{' '}
-        <span>Typescript</span> and <span>Material-UI</span> 💻.
-      </h2>
+    <div
+      style={{
+        padding: '7.5vw',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <div
         ref={flexRowRef}
         id='flexRow'
         style={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           flexWrap: 'wrap',
         }}
       >
+        <h1
+          id='works'
+          style={{
+            color: 'rgb(12, 18, 72)',
+            margin: 0,
+            paddingBottom: '7.5vw',
+            width: windowWidth >= theme.breakpoints.values.md ? '80vw' : '100%',
+          }}
+        >
+          Some Things I’ve Built 🔮
+        </h1>
         {flexRowWidth && (
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              marginTop: `${MARGINS_TOP}px`,
-            }}
-          >
-            <Paper elevation={12} style={{ display: 'flex', flex: '1 1 100%' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  flex: '0 1 50%',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <a
-                  style={{ marginBottom: '-5px' }}
-                  href='https://vigorous-wright-d3c341.netlify.app/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <ProgressiveImgWithFallback
-                    src={
-                      require('../assets/works/fem-order-summary.webp').default
-                    }
-                    srcFallback={
-                      require('../assets/works/fem-order-summary.png').default
-                    }
-                    placeholder={
-                      require('../assets/works/fem-order-summary_lowres.webp')
-                        .default
-                    }
-                    placeholderFallback={
-                      require('../assets/works/fem-order-summary_lowres.png')
-                        .default
-                    }
-                    className={`${classes.imgWorksScaled} ${classes.portraitImg} ${classes.marginRight}`}
-                    animShift={animShiftPortraitRight}
-                  />
-                </a>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: '0 1 50%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}
-              >
-                <h1>Order Summary Component</h1>
-                <h2 style={{ paddingTop: 0 }}>
-                  A beautiful, responsive & reuseable order summary component.
-                </h2>
-              </div>
-            </Paper>
-          </div>
+          <WorksCard
+            parentWidth={flexRowWidth}
+            marginTop='0vw'
+            imgSide='right'
+          />
         )}
         {flexRowWidth && (
           <div
@@ -146,6 +111,7 @@ export default function FrontendWorks() {
               display: 'flex',
               flex: '1 1 100%',
               marginTop: `${MARGINS_TOP}px`,
+              padding: '10vw 0vw 10vw 0vw',
             }}
           >
             <Paper elevation={12} style={{ display: 'flex', flex: '1 1 100%' }}>
@@ -160,7 +126,7 @@ export default function FrontendWorks() {
                 }}
               >
                 <h1 style={{ textAlign: 'end' }}>React Calculator</h1>
-                <h2
+                <h3
                   style={{
                     textAlign: 'end',
                     paddingLeft: '70px',
@@ -170,7 +136,7 @@ export default function FrontendWorks() {
                   Showcase for passing data between components using{' '}
                   <span>props</span>, <span>grid layout</span> and hand-picked
                   fonts to get that digital look.
-                </h2>
+                </h3>
               </div>
               <div
                 style={{
@@ -254,9 +220,9 @@ export default function FrontendWorks() {
                 }}
               >
                 <h1>Electricity to Carbon Emissions</h1>
-                <h2 style={{ paddingTop: 0 }}>
+                <h3 style={{ paddingTop: 0 }}>
                   Showcase for interactive <span>3rd party API</span> usage.
-                </h2>
+                </h3>
               </div>
             </Paper>
           </div>
@@ -281,7 +247,7 @@ export default function FrontendWorks() {
                 }}
               >
                 <h1 style={{ textAlign: 'end' }}>Greek Restaurant</h1>
-                <h2
+                <h3
                   style={{
                     textAlign: 'end',
                     paddingLeft: '70px',
@@ -290,7 +256,7 @@ export default function FrontendWorks() {
                 >
                   Responsive page for Dionysos Restaurant with design
                   inspiration from <span>Behance</span>.
-                </h2>
+                </h3>
               </div>
               <div
                 style={{
@@ -372,10 +338,10 @@ export default function FrontendWorks() {
                 }}
               >
                 <h1>React Pomodoro Click</h1>
-                <h2 style={{ paddingTop: 0 }}>
+                <h3 style={{ paddingTop: 0 }}>
                   Another showcase for passing data between components using{' '}
                   <span>props</span> for interactivity.
-                </h2>
+                </h3>
               </div>
             </Paper>
           </div>
@@ -410,7 +376,7 @@ export default function FrontendWorks() {
                     justifyContent: 'center',
                   }}
                 >
-                  <h2
+                  <h3
                     style={{
                       textAlign: 'end',
                       paddingLeft: '70px',
@@ -419,7 +385,7 @@ export default function FrontendWorks() {
                   >
                     Yet another beautiful, responsive & reuseable react
                     component.
-                  </h2>
+                  </h3>
                 </div>
                 <div
                   style={{
@@ -497,6 +463,6 @@ export default function FrontendWorks() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
