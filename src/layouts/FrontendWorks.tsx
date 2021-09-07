@@ -8,10 +8,10 @@ import WorksCard from '../components/WorksCard';
 import useWindowSize from '../hooks/useWindowResize';
 
 const useStyles = makeStyles({
-  imgDesktop: (props: { upMd: boolean }) => ({
+  imgDesktop: (props: { upMd: boolean; windowWidth: number }) => ({
     ...imgBase,
     ...hoverable,
-    width: props.upMd ? '70vw' : '450px',
+    width: props.upMd ? '70vw' : `${props.windowWidth * 0.95}px`,
   }),
 });
 
@@ -21,7 +21,7 @@ export default function FrontendWorks() {
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
   const upMd = windowWidth >= theme.breakpoints.values.md;
-  const classes = useStyles({ upMd });
+  const classes = useStyles({ upMd, windowWidth });
 
   useLayoutEffect(() => {
     setWidth(parentRowRef.current?.offsetWidth || 0);
