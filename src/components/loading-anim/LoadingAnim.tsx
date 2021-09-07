@@ -48,9 +48,3 @@ export default function LoadingAnim(props: {
     </div>
   );
 }
-
-LoadingAnim.defaultProps = {
-  absolute: false,
-  top: '0px',
-  left: '0px',
-};
