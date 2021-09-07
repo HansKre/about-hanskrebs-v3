@@ -20,6 +20,8 @@ type DescriptionProps = {
 
 type Props = {
   parentWidth: number;
+  marginTop?: string;
+  marginBottom?: string;
   imgSide: keyof typeof ImgSides;
   backgroundColor?: string;
   href: string;
@@ -32,6 +34,8 @@ export default function WorksCard(props: Props) {
   // eslint-disable-next-line object-curly-newline
   const {
     parentWidth,
+    marginTop,
+    marginBottom,
     imgSide,
     backgroundColor,
     href,
@@ -58,8 +62,8 @@ export default function WorksCard(props: Props) {
           flexDirection:
             ImgSides[imgSide] === ImgSides.left ? 'row' : 'row-reverse',
           width: windowWidth >= theme.breakpoints.values.md ? '80vw' : '100%',
-          marginTop: '48px',
-          marginBottom: '56px',
+          marginTop: `calc(48px + ${marginTop})`,
+          marginBottom: `calc(56px + ${marginBottom})`,
           borderRadius: '20px',
           ...(ImgSides[imgSide] === ImgSides.left && {
             position: 'relative',

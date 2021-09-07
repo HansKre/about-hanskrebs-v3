@@ -107,7 +107,8 @@ export default function FrontendWorks() {
       <Heading />
       <WorksCard
         parentWidth={parentRowWidth}
-        imgSide='left'
+        marginBottom='7.5vw'
+        imgSide='right'
         href='https://vigorous-wright-d3c341.netlify.app/'
         imgProps={{
           src: require('../assets/works/fem-order-summary.webp').default,
