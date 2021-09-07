@@ -62,8 +62,8 @@ export default function WorksCard(props: Props) {
           flexDirection:
             ImgSides[imgSide] === ImgSides.left ? 'row' : 'row-reverse',
           width: windowWidth >= theme.breakpoints.values.md ? '80vw' : '100%',
-          marginTop: `calc(48px + ${marginTop})`,
-          marginBottom: `calc(56px + ${marginBottom})`,
+          marginTop: `calc(48px + ${marginTop || '0px'})`,
+          marginBottom: `calc(56px + ${marginBottom || '0px'})`,
           borderRadius: '20px',
           ...(ImgSides[imgSide] === ImgSides.left && {
             position: 'relative',
