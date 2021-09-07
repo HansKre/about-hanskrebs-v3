@@ -103,7 +103,7 @@ export default function LandingPage() {
             <>
               <a href='#about'>ABOUT</a>
               <a href='#works'>WORKS</a>
-              <a href='#photography'>PHOTOGRAPHY</a>
+              {/* <a href='#photography'>PHOTOGRAPHY</a> */}
               <a href='#contact'>CONTACT</a>
             </>
           ) : (
