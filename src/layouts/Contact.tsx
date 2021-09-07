@@ -32,7 +32,7 @@ export default function Contact() {
         padding: '7.5vw',
       }}
     >
-      <h1 style={{ color: 'rgb(12, 18, 72)' }}>
+      <h1 id='contact' style={{ color: 'rgb(12, 18, 72)' }}>
         Let’s Build Something Together 👋
       </h1>
       <Grid container>

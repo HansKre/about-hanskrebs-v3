@@ -67,9 +67,9 @@ export default function FrontendWorks() {
 
   return (
     <>
-      <h1>Frontend Works 🔮</h1>
+      <h1 id='works'>Frontend Works 🔮</h1>
       <h2>
-        As my preferred techstack I'm using <span>React</span> with{' '}
+        As my preferred techstack I’m using <span>React</span> with{' '}
         <span>Typescript</span> and <span>Material-UI</span> 💻.
       </h2>
       <div
