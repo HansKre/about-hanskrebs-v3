@@ -134,7 +134,7 @@ export default function LandingPage() {
             </span>{' '}
             Software Architect, and Photographer.
           </h1>
-          <h2>Welcome To My About Me Page!</h2>
+          <h4>Welcome To My About Me Page!</h4>
         </div>
       </Grid>
     </Grid>
