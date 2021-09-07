@@ -11,12 +11,8 @@ build
 *.lock
 
 # postpone fixing lint-errors in not yet used files
-ProgressiveImgWithFallback.tsx
-ProgressiveImg.tsx
 FullHeightWrapper.tsx
-FrontendWorks.tsx
 AboutMe.tsx
-WebpWithFallback.tsx
 Photography.tsx
 MarginsLeftRight.tsx
 /src/components/LandingPage.tsx
