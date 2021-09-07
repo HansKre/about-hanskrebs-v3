@@ -135,7 +135,42 @@ export default function FrontendWorks() {
           </b>
         </h3>
         <h3 style={{ color: theme.palette.primary.contrastText }}>
-          <i>React.js | Material-ui | CSS | Netlify</i>
+          <i>React.js | Material-ui | Netlify</i>
+        </h3>
+      </WorksCard>
+      <WorksCard
+        parentWidth={parentRowWidth}
+        marginTop='7.5vw'
+        marginBottom='7.5vw'
+        imgSide='left'
+        backgroundColor='rgb(178, 178, 178)'
+        href='https://calculator4711.s3.eu-central-1.amazonaws.com/index.html'
+        imgProps={{
+          src: require('../assets/works/calc.webp').default,
+          srcFallback: require('../assets/works/calc.gif').default,
+          placeholder: require('../assets/works/calc_lowres.webp').default,
+          placeholderFallback: require('../assets/works/calc_lowres.gif')
+            .default,
+        }}
+        descriptionProps={{
+          title: 'Calculator',
+          github: 'https://github.com/HansKre/react-calculator',
+        }}
+      >
+        <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
+          My goal was to create an interactive UI to showcase React’s
+          capabilities for passing data between child-ccomponents using props.
+        </h3>
+        <h3>
+          I found that creating the Calculator-Layout with CSS Flexbox was
+          really tedious and required many div-wrappers so I ended up using CSS
+          Grid instead.
+        </h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
+          <b>What I learned: CSS Grid Layout</b>
+        </h3>
+        <h3 style={{ color: theme.palette.primary.contrastText }}>
+          <i>React.js | CSS Grid | AWS S3</i>
         </h3>
       </WorksCard>
       <div
@@ -145,72 +180,9 @@ export default function FrontendWorks() {
           padding: '0 7.5vw',
           justifyContent: 'center',
           flexWrap: 'wrap',
-          backgroundColor: 'rgb(178, 178, 178)',
+          backgroundColor: 'limegreen',
         }}
       >
-        {parentRowWidth && (
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              marginTop: `${MARGINS_TOP}px`,
-              padding: '10vw 0vw 10vw 0vw',
-            }}
-          >
-            <Paper elevation={12} style={{ display: 'flex', flex: '1 1 100%' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: '0 1 50%',
-                  alignItems: 'flex-end',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}
-              >
-                <h1 style={{ textAlign: 'end' }}>React Calculator</h1>
-                <h3
-                  style={{
-                    textAlign: 'end',
-                    paddingLeft: '70px',
-                    paddingTop: 0,
-                  }}
-                >
-                  Showcase for passing data between components using{' '}
-                  <span>props</span>, <span>grid layout</span> and hand-picked
-                  fonts to get that digital look.
-                </h3>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flex: '0 1 50%',
-                  justifyContent: 'flex-start',
-                }}
-              >
-                <a
-                  style={{ marginBottom: '-5px' }}
-                  href='https://calculator4711.s3.eu-central-1.amazonaws.com/index.html'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <ProgressiveImgWithFallback
-                    src={require('../assets/works/calc.webp').default}
-                    srcFallback={require('../assets/works/calc.gif').default}
-                    placeholder={
-                      require('../assets/works/calc_lowres.webp').default
-                    }
-                    placeholderFallback={
-                      require('../assets/works/calc_lowres.gif').default
-                    }
-                    className={`${classes.imgWorksScaled} ${classes.portraitImg} ${classes.marginLeft}`}
-                    animShift={animShiftPortraitLeft}
-                  />
-                </a>
-              </div>
-            </Paper>
-          </div>
-        )}
         {parentRowWidth && (
           <div
             style={{
