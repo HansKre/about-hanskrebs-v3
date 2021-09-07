@@ -4,8 +4,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuIconOpen from '@material-ui/icons/MenuOpen';
+import { withStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core';
 import useWindowSize from '../hooks/useWindowResize';
+
+const StyledMenuItem = withStyles({
+  root: {
+    fontSize: '1.8rem',
+  },
+})(MenuItem);
 
 export default function Burger() {
   const theme = useTheme();
@@ -60,12 +67,18 @@ export default function Burger() {
           horizontal: 'right',
         }}
       >
-        <MenuItem onClick={() => handleClose('about')}>ABOUT</MenuItem>
-        <MenuItem onClick={() => handleClose('works')}>WORKS</MenuItem>
-        <MenuItem onClick={() => handleClose('photography')}>
+        <StyledMenuItem onClick={() => handleClose('about')}>
+          ABOUT
+        </StyledMenuItem>
+        <StyledMenuItem onClick={() => handleClose('works')}>
+          WORKS
+        </StyledMenuItem>
+        <StyledMenuItem onClick={() => handleClose('photography')}>
           PHOTOGRAPHY
-        </MenuItem>
-        <MenuItem onClick={() => handleClose('contact')}>CONTACT</MenuItem>
+        </StyledMenuItem>
+        <StyledMenuItem onClick={() => handleClose('contact')}>
+          CONTACT
+        </StyledMenuItem>
       </Menu>
     </div>
   );
