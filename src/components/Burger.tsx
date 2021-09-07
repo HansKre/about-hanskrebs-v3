@@ -25,11 +25,17 @@ export default function Burger() {
 
   const scrollTo = (id: string) => {
     const domEl = document.getElementById(id);
-    domEl?.scrollIntoView({ behavior: 'smooth' });
+    if (!domEl) {
+      throw new Error(`Cannot scroll to ${id} since it does not exist.`);
+    }
+    domEl.scrollIntoView({ behavior: 'smooth' });
   };
   const handleClose = (id: string) => {
     setAnchorEl(null);
-    scrollTo(id);
+    // wait for menu to be detached first, or it will scroll back in Chrome
+    setTimeout(() => {
+      scrollTo(id);
+    }, 100);
   };
 
   return (
