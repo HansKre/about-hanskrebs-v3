@@ -25,10 +25,7 @@ export default function Burger() {
 
   const scrollTo = (id: string) => {
     const domEl = document.getElementById(id);
-    if (!domEl) {
-      throw new Error(`Cannot scroll to ${id} since it does not exist.`);
-    }
-    domEl.scrollIntoView({ behavior: 'smooth' });
+    domEl?.scrollIntoView({ behavior: 'smooth' });
   };
   const handleClose = (id: string) => {
     setAnchorEl(null);
