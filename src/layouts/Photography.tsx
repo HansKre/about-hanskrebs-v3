@@ -75,7 +75,9 @@ export default function Photography() {
         padding: '7.5vw',
       }}
     >
-      <h1 style={{ color: 'rgb(12, 18, 72)' }}>Photography 📸</h1>
+      <h1 id='photography' style={{ color: 'rgb(12, 18, 72)' }}>
+        Photography 📸
+      </h1>
       <h3
         style={{
           color: 'rgb(12, 18, 72)',
