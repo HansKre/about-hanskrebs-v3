@@ -111,8 +111,8 @@ export default function About() {
           }}
         >
           <h3>
-            Hi there! I’m Hans. I’m a passionate introvert who loves building
-            things with <i className='label'>code</i>.
+            Hi there! I’m Hans. I’m a passionate person who loves building
+            things with code.
           </h3>
           <h3>
             My first experience with programming was when I was 12, but it
@@ -151,21 +151,21 @@ export default function About() {
         >
           <h3>
             Since then, I completed a degree in computer science and found my
-            true passion in <i className='label'>Front End Development</i> and
-            Software Architecture. I love honing my skills to constantly get
-            better in Javascript, Typescript, CSS and React. Seeing my projects
-            improve with the level of my skills gives me great pleasure and
-            feels super rewarding to me.
+            true passion in Front End Development and Software Architecture. I
+            love honing my skills to constantly get better in Javascript,
+            Typescript, CSS and React. Seeing my projects improve with the level
+            of my skills gives me great pleasure and feels super rewarding to
+            me.
           </h3>
           <h3>
             Besides programming, I enjoy photography 📸, cycling 🚴‍♂️, good wine
             🍷 and being outdoor 🌿.
           </h3>
           <h3>
-            <i className='label'>Photography</i> naturally complements the eye
-            for detail, lines, composition and proportions. For me, it’s about
-            capturing the moment, beauty and wonders of our amazing world while
-            being creative. It’s such an amazing art.
+            Photography naturally complements the eye for detail, lines,
+            composition and proportions. For me, it’s about capturing the
+            moment, beauty and wonders of our amazing world while being
+            creative. It’s such an amazing art.
           </h3>
         </Grid>
       </Grid>
