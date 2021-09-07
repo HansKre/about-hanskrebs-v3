@@ -148,7 +148,7 @@ export default function FrontendWorks() {
       </WorksCard>
       <WorksCard
         descriptionProps={{
-          title: 'Calculator',
+          title: responsiveText('Calculator', 'Calc'),
           github: 'https://github.com/HansKre/react-calculator',
         }}
         parentWidth={parentRowWidth}
