@@ -32,15 +32,16 @@ const CustomTheme = createTheme({
   palette: {
     primary: {
       main: MAIN_THEME_COLORS[0],
+      light: MAIN_THEME_COLORS[1],
+      contrastText: MAIN_THEME_COLORS[2],
     },
     secondary: {
       main: MAIN_THEME_COLORS[4],
+      light: MAIN_THEME_COLORS[3],
     },
   },
   typography: {
-    fontFamily: [
-      'Nunito', 'sans-serif'
-    ].join()
+    fontFamily: ['Nunito', 'sans-serif'].join(),
   },
   // https://material-ui.com/customization/breakpoints/#custom-breakpoints
   breakpoints: {
@@ -48,7 +49,7 @@ const CustomTheme = createTheme({
       ...breakpoints.values,
       sm: 640,
       md: 900,
-      avatar: 716
+      avatar: 716,
     },
   },
 });
