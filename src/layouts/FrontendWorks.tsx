@@ -96,6 +96,10 @@ export default function FrontendWorks() {
     );
   }
 
+  function responsiveText(long: string, short: string): string {
+    return windowWidth >= theme.breakpoints.values.sm ? long : short;
+  }
+
   return (
     <div
       style={{
@@ -106,6 +110,10 @@ export default function FrontendWorks() {
     >
       <Heading />
       <WorksCard
+        descriptionProps={{
+          title: 'Order Summary Component',
+          github: 'https://github.com/HansKre/fem-order-summary-component',
+        }}
         parentWidth={parentRowWidth}
         marginBottom='7.5vw'
         imgSide='right'
@@ -117,10 +125,6 @@ export default function FrontendWorks() {
             .default,
           placeholderFallback:
             require('../assets/works/fem-order-summary_lowres.png').default,
-        }}
-        descriptionProps={{
-          title: 'Order Summary Component',
-          github: 'https://github.com/HansKre/fem-order-summary-component',
         }}
       >
         <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
@@ -139,6 +143,10 @@ export default function FrontendWorks() {
         </h3>
       </WorksCard>
       <WorksCard
+        descriptionProps={{
+          title: 'Calculator',
+          github: 'https://github.com/HansKre/react-calculator',
+        }}
         parentWidth={parentRowWidth}
         marginTop='7.5vw'
         marginBottom='7.5vw'
@@ -151,10 +159,6 @@ export default function FrontendWorks() {
           placeholder: require('../assets/works/calc_lowres.webp').default,
           placeholderFallback: require('../assets/works/calc_lowres.gif')
             .default,
-        }}
-        descriptionProps={{
-          title: 'Calculator',
-          github: 'https://github.com/HansKre/react-calculator',
         }}
       >
         <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
@@ -173,6 +177,66 @@ export default function FrontendWorks() {
           <i>React.js | CSS Grid | AWS S3</i>
         </h3>
       </WorksCard>
+      <WorksCard
+        descriptionProps={{
+          title: responsiveText(
+            'Electricity to Carbon Emissions',
+            'Carbon Emissions'
+          ),
+          github:
+            'https://github.com/HansKre/carb-emissions-est-for-electricity',
+        }}
+        parentWidth={parentRowWidth}
+        marginTop='7.5vw'
+        marginBottom='7.5vw'
+        imgSide='right'
+        backgroundColor='white'
+        href='https://hardcore-bhabha-ce15d5.netlify.app/'
+        imgProps={{
+          src: require('../assets/works/carbon-emissions.webp').default,
+          srcFallback: require('../assets/works/carbon-emissions.gif').default,
+          placeholder: require('../assets/works/carbon-emissions_lowres.webp')
+            .default,
+          placeholderFallback:
+            require('../assets/works/carbon-emissions_lowres.gif').default,
+        }}
+      >
+        <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
+          React-based frontend for{' '}
+          <a
+            href='https://www.carboninterface.com'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{
+              color: theme.palette.primary.main,
+              fontSize: 'inherit',
+              textDecoration: 'underline',
+            }}
+          >
+            www.carboninterface.com
+          </a>
+          -API. You can enter your weekly electricity usage to receive estimates
+          of your carbon emissions.
+        </h3>
+        <h3>
+          To avoid my API-key being exposed, I proxied all API-requests using
+          Netlify-functions through Next.js.
+        </h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
+          <b>
+            What I learned: CSS specificity and customizing Material-UI
+            components.
+          </b>
+        </h3>
+        <h3 style={{ color: theme.palette.primary.contrastText }}>
+          <i>
+            {responsiveText(
+              'Next.js | Material-UI | Node.js | Netlify',
+              'Next.js | Material-UI'
+            )}
+          </i>
+        </h3>
+      </WorksCard>
       <div
         ref={parentRowRef}
         style={{
@@ -183,65 +247,6 @@ export default function FrontendWorks() {
           backgroundColor: 'limegreen',
         }}
       >
-        {parentRowWidth && (
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              marginTop: `${MARGINS_TOP}px`,
-            }}
-          >
-            <Paper elevation={12} style={{ display: 'flex', flex: '1 1 100%' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  flex: '0 1 50%',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <a
-                  style={{ marginBottom: '-5px' }}
-                  href='https://hardcore-bhabha-ce15d5.netlify.app/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <ProgressiveImgWithFallback
-                    src={
-                      require('../assets/works/carbon-emissions.webp').default
-                    }
-                    srcFallback={
-                      require('../assets/works/carbon-emissions.gif').default
-                    }
-                    placeholder={
-                      require('../assets/works/carbon-emissions_lowres.webp')
-                        .default
-                    }
-                    placeholderFallback={
-                      require('../assets/works/carbon-emissions_lowres.gif')
-                        .default
-                    }
-                    className={`${classes.imgWorksScaled} ${classes.portraitImg} ${classes.marginRight}`}
-                    animShift={animShiftPortraitRight}
-                  />
-                </a>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: '0 1 50%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}
-              >
-                <h1>Electricity to Carbon Emissions</h1>
-                <h3 style={{ paddingTop: 0 }}>
-                  Showcase for interactive <span>3rd party API</span> usage.
-                </h3>
-              </div>
-            </Paper>
-          </div>
-        )}
         {parentRowWidth && (
           <div
             style={{
