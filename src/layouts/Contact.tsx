@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { useTheme } from '@material-ui/core';
 import { SocialIcon } from 'react-social-icons';
 import { hoverable } from '../styles/Styles';
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
 });
 
 export default function Contact() {
+  const theme = useTheme();
   const classes = useStyles();
   return (
     <div
@@ -30,16 +32,14 @@ export default function Contact() {
         justifyContent: 'center',
         height: '100%',
         padding: '7.5vw',
+        backgroundColor: theme.palette.primary.main,
       }}
     >
-      <h1 id='contact' style={{ color: 'rgb(12, 18, 72)' }}>
-        Let’s Build Something Together 👋
-      </h1>
+      <h1 id='contact'>Let’s Build Something Together 👋</h1>
       <Grid container>
         <Grid item container direction='column' xs={12}>
           <h3
             style={{
-              color: 'rgb(12, 18, 72)',
               paddingTop: 0,
               paddingBottom: '40px',
             }}
@@ -47,6 +47,7 @@ export default function Contact() {
             Feel free to reach me out if you’re looking for a developer, have a
             question, or just want to connect.
           </h3>
+          {/* TODO mailto-link */}
           <h3>hans@hanskrebs.me</h3>
         </Grid>
         <Grid
