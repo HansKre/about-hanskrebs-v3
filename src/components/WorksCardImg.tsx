@@ -1,8 +1,10 @@
 /* eslint-disable global-require */
 import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core';
 import { CSSStyle } from '../types/types';
 import ProgressiveImgWithFallback from './ProgressiveImgWithFallback';
 import { hoverable } from '../styles/Styles';
+import useWindowSize from '../hooks/useWindowResize';
 
 const MARGINS_LEFT_RIGHT = 60;
 
@@ -21,10 +23,6 @@ type Props = {
   placeholderFallback: string;
 };
 
-type StyleProps = {
-  parentWidth: number;
-};
-
 const imgBase: CSSStyle = {
   borderRadius: '10px',
   position: 'relative',
@@ -39,7 +37,6 @@ const hoverableScaled: CSSStyle = {
 
 const animShiftPortraitRight = { top: '35%', left: '30%' };
 const animShiftPortraitLeft = { top: '35%', left: '30%' };
-// const animShiftLandscape = { top: '35%', left: '49%' };
 
 const useStyles = makeStyles({
   imgWorks: {
@@ -51,15 +48,11 @@ const useStyles = makeStyles({
     ...hoverableScaled,
     transform: 'scale(1.25)',
   },
-  landscapeImg: (props: StyleProps) => ({
-    width: `${(props.parentWidth - 2 * MARGINS_LEFT_RIGHT) / 1.5}px`,
+  portraitImg: (props: { downXs: boolean }) => ({
+    height: props.downXs
+      ? `${window.visualViewport.height * 0.3}px`
+      : `${window.visualViewport.height * 0.6}px`,
   }),
-  portraitSideImg: (props: StyleProps) => ({
-    height: `${((props.parentWidth - 2 * MARGINS_LEFT_RIGHT) / 2.6) * 0.59}px`,
-  }),
-  portraitImg: {
-    height: `${window.visualViewport.height * 0.6}px`,
-  },
   marginRight: {
     marginRight: `${MARGINS_LEFT_RIGHT}px`,
   },
@@ -78,7 +71,11 @@ export default function WorksCardImg(props: Props) {
     placeholder,
     placeholderFallback,
   } = props;
-  const classes = useStyles({ parentWidth });
+  const { width: windowWidth } = useWindowSize();
+  const theme = useTheme();
+  const downXs = windowWidth < theme.breakpoints.values.xs;
+  const classes = useStyles({ downXs });
+
   return (
     <a
       style={{

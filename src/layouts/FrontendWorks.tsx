@@ -21,6 +21,7 @@ export default function FrontendWorks() {
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
   const upMd = windowWidth >= theme.breakpoints.values.md;
+  const downXs = windowWidth < theme.breakpoints.values.xs;
   const classes = useStyles({ upMd, windowWidth });
 
   useLayoutEffect(() => {
@@ -37,7 +38,7 @@ export default function FrontendWorks() {
         ref={parentRowRef}
         style={{
           display: 'flex',
-          padding: '0 7.5vw 7.5vw 7.5vw',
+          padding: downXs ? '0 7.5vw 0vw 7.5vw' : '0 7.5vw 7.5vw 7.5vw',
           justifyContent: 'center',
         }}
       >
@@ -46,7 +47,6 @@ export default function FrontendWorks() {
           style={{
             color: theme.palette.primary.main,
             margin: 0,
-            paddingBottom: '0 7.5vw',
             width: upMd ? '80vw' : '100%',
           }}
         >

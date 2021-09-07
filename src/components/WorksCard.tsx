@@ -48,6 +48,8 @@ export default function WorksCard(props: Props) {
   //
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
+  const upMd = windowWidth >= theme.breakpoints.values.md;
+  const downXs = windowWidth < theme.breakpoints.values.xs;
   return (
     <div
       style={{
@@ -64,13 +66,13 @@ export default function WorksCard(props: Props) {
           display: 'flex',
           flexDirection:
             ImgSides[imgSide] === ImgSides.left ? 'row' : 'row-reverse',
-          width: windowWidth >= theme.breakpoints.values.md ? '80vw' : '100%',
+          width: upMd ? '80vw' : '100%',
           marginTop: `calc(48px + ${marginTop || '0px'})`,
           marginBottom: `calc(56px + ${marginBottom || '0px'})`,
           borderRadius: '20px',
           ...(ImgSides[imgSide] === ImgSides.left && {
             position: 'relative',
-            right: '-25px',
+            ...(!downXs && { right: '-25px' }),
           }),
         }}
       >
