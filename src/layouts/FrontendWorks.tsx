@@ -313,62 +313,6 @@ export default function FrontendWorks() {
               marginTop: `${MARGINS_TOP}px`,
             }}
           >
-            <Paper elevation={12} style={{ display: 'flex', flex: '1 1 100%' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  flex: '0 1 50%',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <a
-                  style={{ marginBottom: '-5px' }}
-                  href='https://pomodoro4711.s3.eu-central-1.amazonaws.com/index.html'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <ProgressiveImgWithFallback
-                    src={require('../assets/works/pomodoro.webp').default}
-                    srcFallback={
-                      require('../assets/works/pomodoro.gif').default
-                    }
-                    placeholder={
-                      require('../assets/works/pomodoro_lowres.webp').default
-                    }
-                    placeholderFallback={
-                      require('../assets/works/pomodoro_lowres.gif').default
-                    }
-                    className={`${classes.imgWorksScaled} ${classes.portraitImg} ${classes.marginRight}`}
-                    animShift={animShiftPortraitRight}
-                  />
-                </a>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: '0 1 50%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}
-              >
-                <h1>React Pomodoro Click</h1>
-                <h3 style={{ paddingTop: 0 }}>
-                  Another showcase for passing data between components using{' '}
-                  <span>props</span> for interactivity.
-                </h3>
-              </div>
-            </Paper>
-          </div>
-        )}
-        {parentRowWidth && (
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              marginTop: `${MARGINS_TOP}px`,
-            }}
-          >
             <Paper
               elevation={12}
               style={{
