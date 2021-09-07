@@ -19,7 +19,6 @@ type DescriptionProps = {
 };
 
 type Props = {
-  parentWidth: number;
   marginTop?: string;
   marginBottom?: string;
   imgSide: keyof typeof ImgSides;
@@ -34,7 +33,6 @@ type Props = {
 export default function WorksCard(props: Props) {
   // eslint-disable-next-line object-curly-newline
   const {
-    parentWidth,
     marginTop,
     marginBottom,
     imgSide,
@@ -76,12 +74,7 @@ export default function WorksCard(props: Props) {
           }),
         }}
       >
-        <WorksCardImg
-          parentWidth={parentWidth}
-          imgSide={imgSide}
-          {...imgProps}
-          href={href}
-        />
+        <WorksCardImg imgSide={imgSide} {...imgProps} href={href} />
         <WorksCardDescription
           imgSide={imgSide}
           {...descriptionProps}

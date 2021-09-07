@@ -1,5 +1,4 @@
 /* eslint-disable global-require */
-import { useState, useLayoutEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core';
 import ProgressiveImgWithFallback from '../components/ProgressiveImgWithFallback';
@@ -16,17 +15,11 @@ const useStyles = makeStyles({
 });
 
 export default function FrontendWorks() {
-  const parentRowRef = useRef<HTMLDivElement>(null);
-  const [parentRowWidth, setWidth] = useState(0);
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
   const upMd = windowWidth >= theme.breakpoints.values.md;
   const downXs = windowWidth < theme.breakpoints.values.xs;
   const classes = useStyles({ upMd, windowWidth });
-
-  useLayoutEffect(() => {
-    setWidth(parentRowRef.current?.offsetWidth || 0);
-  }, [parentRowRef]);
 
   function responsiveText(long: string, short: string): string {
     return windowWidth >= theme.breakpoints.values.sm ? long : short;
@@ -35,7 +28,6 @@ export default function FrontendWorks() {
   function Heading() {
     return (
       <div
-        ref={parentRowRef}
         style={{
           display: 'flex',
           padding: downXs ? '0 7.5vw 0vw 7.5vw' : '0 7.5vw 7.5vw 7.5vw',
@@ -113,7 +105,6 @@ export default function FrontendWorks() {
           title: 'Order Summary Component',
           github: 'https://github.com/HansKre/fem-order-summary-component',
         }}
-        parentWidth={parentRowWidth}
         marginBottom='7.5vw'
         imgSide='right'
         href='https://vigorous-wright-d3c341.netlify.app/'
@@ -151,7 +142,6 @@ export default function FrontendWorks() {
           title: responsiveText('Calculator', 'Calc'),
           github: 'https://github.com/HansKre/react-calculator',
         }}
-        parentWidth={parentRowWidth}
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='left'
@@ -195,7 +185,6 @@ export default function FrontendWorks() {
           github:
             'https://github.com/HansKre/carb-emissions-est-for-electricity',
         }}
-        parentWidth={parentRowWidth}
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='right'
@@ -252,7 +241,6 @@ export default function FrontendWorks() {
           title: responsiveText('Greek Restaurant', 'Dionysos'),
           github: 'https://github.com/HansKre/dionysos-stuttgart-v3',
         }}
-        parentWidth={parentRowWidth}
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='left'
@@ -323,7 +311,6 @@ export default function FrontendWorks() {
           ),
           github: 'https://github.com/HansKre/fem-stats-preview-component',
         }}
-        parentWidth={parentRowWidth}
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='right'

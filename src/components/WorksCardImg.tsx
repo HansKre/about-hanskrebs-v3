@@ -3,10 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core';
 import { CSSStyle } from '../types/types';
 import ProgressiveImgWithFallback from './ProgressiveImgWithFallback';
-import { hoverable } from '../styles/Styles';
+import { hoverable, imgBase } from '../styles/Styles';
 import useWindowSize from '../hooks/useWindowResize';
-
-const MARGINS_LEFT_RIGHT = 60;
 
 export enum ImgSides {
   left,
@@ -14,18 +12,12 @@ export enum ImgSides {
 }
 
 type Props = {
-  parentWidth: number;
   imgSide: keyof typeof ImgSides;
   href: string;
   src: string;
   srcFallback: string;
   placeholder: string;
   placeholderFallback: string;
-};
-
-const imgBase: CSSStyle = {
-  borderRadius: '10px',
-  position: 'relative',
 };
 
 const hoverableScaled: CSSStyle = {
@@ -39,10 +31,6 @@ const animShiftPortraitRight = { top: '35%', left: '30%' };
 const animShiftPortraitLeft = { top: '35%', left: '30%' };
 
 const useStyles = makeStyles({
-  imgWorks: {
-    ...imgBase,
-    ...hoverable,
-  },
   imgWorksScaled: {
     ...imgBase,
     ...hoverableScaled,
@@ -53,24 +41,11 @@ const useStyles = makeStyles({
       ? `${window.visualViewport.height * 0.3}px`
       : `${window.visualViewport.height * 0.6}px`,
   }),
-  marginRight: {
-    marginRight: `${MARGINS_LEFT_RIGHT}px`,
-  },
-  marginLeft: {
-    marginLeft: `${MARGINS_LEFT_RIGHT}px`,
-  },
 });
 
 export default function WorksCardImg(props: Props) {
-  const {
-    parentWidth,
-    imgSide,
-    href,
-    src,
-    srcFallback,
-    placeholder,
-    placeholderFallback,
-  } = props;
+  const { imgSide, href, src, srcFallback, placeholder, placeholderFallback } =
+    props;
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
   const downXs = windowWidth < theme.breakpoints.values.xs;
@@ -95,7 +70,6 @@ export default function WorksCardImg(props: Props) {
         placeholder={placeholder}
         placeholderFallback={placeholderFallback}
         className={`${classes.imgWorksScaled} ${classes.portraitImg}`}
-        // animShift={animShiftPortraitRight}
         animShift={
           ImgSides[imgSide] === ImgSides.left
             ? animShiftPortraitLeft
