@@ -3,12 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "airbnb",
-    "airbnb-typescript",
-    "plugin:import/react"
-  ],
+  "extends": ["airbnb", "airbnb-typescript", "plugin:import/react"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -19,8 +14,6 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "cypress",
-    "import",
     "jsx-a11y",
     "prettier",
     "react",
