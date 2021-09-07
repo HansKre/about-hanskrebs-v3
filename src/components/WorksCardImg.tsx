@@ -37,8 +37,8 @@ const hoverableScaled: CSSStyle = {
   },
 };
 
-const animShiftPortraitRight = { top: '35%', left: '32%' };
-const animShiftPortraitLeft = { top: '35%', left: '33%' };
+const animShiftPortraitRight = { top: '35%', left: '30%' };
+const animShiftPortraitLeft = { top: '35%', left: '30%' };
 // const animShiftLandscape = { top: '35%', left: '49%' };
 
 const useStyles = makeStyles({
