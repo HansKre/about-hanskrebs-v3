@@ -13,7 +13,7 @@ const MARGINS_TOP = 200;
 const MARGINS_LEFT_RIGHT = 60;
 
 type StyleProps = {
-  flexRowWidth: number;
+  parentRowWidth: number;
 };
 
 const imgBase: CSSStyle = {
@@ -43,10 +43,12 @@ const useStyles = makeStyles({
     transform: 'scale(1.25)',
   },
   landscapeImg: (props: StyleProps) => ({
-    width: `${(props.flexRowWidth - 2 * MARGINS_LEFT_RIGHT) / 1.5}px`,
+    width: `${(props.parentRowWidth - 2 * MARGINS_LEFT_RIGHT) / 1.5}px`,
   }),
   portraitSideImg: (props: StyleProps) => ({
-    height: `${((props.flexRowWidth - 2 * MARGINS_LEFT_RIGHT) / 2.6) * 0.59}px`,
+    height: `${
+      ((props.parentRowWidth - 2 * MARGINS_LEFT_RIGHT) / 2.6) * 0.59
+    }px`,
   }),
   portraitImg: {
     height: `${window.visualViewport.height * 0.6}px`,
@@ -60,31 +62,23 @@ const useStyles = makeStyles({
 });
 
 export default function FrontendWorks() {
-  const flexRowRef = useRef<HTMLDivElement>(null);
-  const [flexRowWidth, setWidth] = useState(0);
-  const classes = useStyles({ flexRowWidth });
+  const parentRowRef = useRef<HTMLDivElement>(null);
+  const [parentRowWidth, setWidth] = useState(0);
+  const classes = useStyles({ parentRowWidth });
   const theme = useTheme();
   const { width: windowWidth } = useWindowSize();
 
   useLayoutEffect(() => {
-    setWidth(flexRowRef.current?.offsetWidth || 0);
-  }, [flexRowRef]);
+    setWidth(parentRowRef.current?.offsetWidth || 0);
+  }, [parentRowRef]);
 
-  return (
-    <div
-      style={{
-        padding: '7.5vw',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+  function Heading() {
+    return (
       <div
-        ref={flexRowRef}
-        id='flexRow'
         style={{
           display: 'flex',
+          padding: '0 7.5vw 7.5vw 7.5vw',
           justifyContent: 'center',
-          flexWrap: 'wrap',
         }}
       >
         <h1
@@ -92,20 +86,68 @@ export default function FrontendWorks() {
           style={{
             color: 'rgb(12, 18, 72)',
             margin: 0,
-            paddingBottom: '7.5vw',
+            paddingBottom: '0 7.5vw',
             width: windowWidth >= theme.breakpoints.values.md ? '80vw' : '100%',
           }}
         >
           Some Things I’ve Built 🔮
         </h1>
-        {flexRowWidth && (
-          <WorksCard
-            parentWidth={flexRowWidth}
-            marginTop='0vw'
-            imgSide='right'
-          />
-        )}
-        {flexRowWidth && (
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        padding: '7.5vw 0',
+        flexDirection: 'column',
+      }}
+    >
+      <Heading />
+      <WorksCard
+        parentWidth={parentRowWidth}
+        imgSide='left'
+        href='https://vigorous-wright-d3c341.netlify.app/'
+        imgProps={{
+          src: require('../assets/works/fem-order-summary.webp').default,
+          srcFallback: require('../assets/works/fem-order-summary.png').default,
+          placeholder: require('../assets/works/fem-order-summary_lowres.webp')
+            .default,
+          placeholderFallback:
+            require('../assets/works/fem-order-summary_lowres.png').default,
+        }}
+        descriptionProps={{
+          title: 'Order Summary Component',
+          github: 'https://github.com/HansKre/fem-order-summary-component',
+        }}
+      >
+        <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
+          My goal was to implement a design pixel-perfectly with only an image
+          of it and the font-family given. Result was this beautiful and
+          reuseable order summary component.
+        </h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
+          <b>
+            What I learned: estimate distance between UI elements, positioning
+            and aligning items with CSS, improved my eye for detail
+          </b>
+        </h3>
+        <h3 style={{ color: theme.palette.primary.contrastText }}>
+          <i>React.js | Material-ui | CSS | Netlify</i>
+        </h3>
+      </WorksCard>
+      <div
+        ref={parentRowRef}
+        style={{
+          display: 'flex',
+          padding: '0 7.5vw',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+          backgroundColor: 'rgb(178, 178, 178)',
+        }}
+      >
+        {parentRowWidth && (
           <div
             style={{
               display: 'flex',
@@ -168,7 +210,7 @@ export default function FrontendWorks() {
             </Paper>
           </div>
         )}
-        {flexRowWidth && (
+        {parentRowWidth && (
           <div
             style={{
               display: 'flex',
@@ -227,7 +269,7 @@ export default function FrontendWorks() {
             </Paper>
           </div>
         )}
-        {flexRowWidth && (
+        {parentRowWidth && (
           <div
             style={{
               display: 'flex',
@@ -290,7 +332,7 @@ export default function FrontendWorks() {
             </Paper>
           </div>
         )}
-        {flexRowWidth && (
+        {parentRowWidth && (
           <div
             style={{
               display: 'flex',
@@ -346,7 +388,7 @@ export default function FrontendWorks() {
             </Paper>
           </div>
         )}
-        {flexRowWidth && (
+        {parentRowWidth && (
           <div
             style={{
               display: 'flex',

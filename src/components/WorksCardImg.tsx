@@ -11,6 +11,16 @@ export enum ImgSides {
   right,
 }
 
+type Props = {
+  parentWidth: number;
+  imgSide: keyof typeof ImgSides;
+  href: string;
+  src: string;
+  srcFallback: string;
+  placeholder: string;
+  placeholderFallback: string;
+};
+
 type StyleProps = {
   parentWidth: number;
 };
@@ -27,8 +37,8 @@ const hoverableScaled: CSSStyle = {
   },
 };
 
-// const animShiftPortraitRight = { top: '35%', left: '25%' };
-// const animShiftPortraitLeft = { top: '35%', left: '47%' };
+const animShiftPortraitRight = { top: '35%', left: '32%' };
+const animShiftPortraitLeft = { top: '35%', left: '33%' };
 // const animShiftLandscape = { top: '35%', left: '49%' };
 
 const useStyles = makeStyles({
@@ -58,13 +68,16 @@ const useStyles = makeStyles({
   },
 });
 
-type Props = {
-  parentWidth: number;
-  imgSide: keyof typeof ImgSides;
-};
-
 export default function WorksCardImg(props: Props) {
-  const { parentWidth, imgSide } = props;
+  const {
+    parentWidth,
+    imgSide,
+    href,
+    src,
+    srcFallback,
+    placeholder,
+    placeholderFallback,
+  } = props;
   const classes = useStyles({ parentWidth });
   return (
     <a
@@ -75,23 +88,22 @@ export default function WorksCardImg(props: Props) {
           ImgSides[imgSide] === ImgSides.left ? 'flex-start' : 'flex-end',
         marginBottom: '-5px',
       }}
-      href='https://vigorous-wright-d3c341.netlify.app/'
+      href={href}
       target='_blank'
       rel='noreferrer'
     >
       <ProgressiveImgWithFallback
-        src={require('../assets/works/fem-order-summary.webp').default}
-        srcFallback={require('../assets/works/fem-order-summary.png').default}
-        placeholder={
-          require('../assets/works/fem-order-summary_lowres.webp').default
-        }
-        placeholderFallback={
-          require('../assets/works/fem-order-summary_lowres.png').default
-        }
+        src={src}
+        srcFallback={srcFallback}
+        placeholder={placeholder}
+        placeholderFallback={placeholderFallback}
         className={`${classes.imgWorksScaled} ${classes.portraitImg}`}
-        // TODO: properly shift animation
         // animShift={animShiftPortraitRight}
-        animShift={{ top: '0', left: '0' }}
+        animShift={
+          ImgSides[imgSide] === ImgSides.left
+            ? animShiftPortraitLeft
+            : animShiftPortraitRight
+        }
       />
     </a>
   );
