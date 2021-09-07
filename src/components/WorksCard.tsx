@@ -28,6 +28,7 @@ type Props = {
   imgProps: ImgProps;
   descriptionProps: DescriptionProps;
   children: ReactNode;
+  featuredContent?: ReactNode;
 };
 
 export default function WorksCard(props: Props) {
@@ -42,6 +43,7 @@ export default function WorksCard(props: Props) {
     imgProps,
     descriptionProps,
     children,
+    featuredContent,
   } = props;
   //
   const { width: windowWidth } = useWindowSize();
@@ -50,6 +52,7 @@ export default function WorksCard(props: Props) {
     <div
       style={{
         display: 'flex',
+        flexWrap: 'wrap',
         padding: '0 7.5vw',
         justifyContent: 'center',
         backgroundColor,
@@ -85,6 +88,7 @@ export default function WorksCard(props: Props) {
           {children}
         </WorksCardDescription>
       </Paper>
+      {featuredContent}
     </div>
   );
 }

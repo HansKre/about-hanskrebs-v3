@@ -1,80 +1,40 @@
 /* eslint-disable global-require */
 import { useState, useLayoutEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import { useTheme } from '@material-ui/core';
-import { CSSStyle } from '../types/types';
 import ProgressiveImgWithFallback from '../components/ProgressiveImgWithFallback';
-import { hoverable } from '../styles/Styles';
+import { hoverable, imgBase } from '../styles/Styles';
 import WorksCard from '../components/WorksCard';
 import useWindowSize from '../hooks/useWindowResize';
 
-const MARGINS_TOP = 200;
-const MARGINS_LEFT_RIGHT = 60;
-
-type StyleProps = {
-  parentRowWidth: number;
-};
-
-const imgBase: CSSStyle = {
-  borderRadius: '10px',
-  position: 'relative',
-};
-
-const hoverableScaled: CSSStyle = {
-  ...hoverable,
-  '&:hover': {
-    transform: 'scale(1.29)',
-  },
-};
-
-const animShiftPortraitRight = { top: '35%', left: '25%' };
-const animShiftPortraitLeft = { top: '35%', left: '47%' };
-const animShiftLandscape = { top: '35%', left: '49%' };
-
 const useStyles = makeStyles({
-  imgWorks: {
+  imgDesktop: (props: { upMd: boolean }) => ({
     ...imgBase,
     ...hoverable,
-  },
-  imgWorksScaled: {
-    ...imgBase,
-    ...hoverableScaled,
-    transform: 'scale(1.25)',
-  },
-  landscapeImg: (props: StyleProps) => ({
-    width: `${(props.parentRowWidth - 2 * MARGINS_LEFT_RIGHT) / 1.5}px`,
+    width: props.upMd ? '70vw' : '450px',
   }),
-  portraitSideImg: (props: StyleProps) => ({
-    height: `${
-      ((props.parentRowWidth - 2 * MARGINS_LEFT_RIGHT) / 2.6) * 0.59
-    }px`,
-  }),
-  portraitImg: {
-    height: `${window.visualViewport.height * 0.6}px`,
-  },
-  marginRight: {
-    marginRight: `${MARGINS_LEFT_RIGHT}px`,
-  },
-  marginLeft: {
-    marginLeft: `${MARGINS_LEFT_RIGHT}px`,
-  },
 });
 
 export default function FrontendWorks() {
   const parentRowRef = useRef<HTMLDivElement>(null);
   const [parentRowWidth, setWidth] = useState(0);
-  const classes = useStyles({ parentRowWidth });
-  const theme = useTheme();
   const { width: windowWidth } = useWindowSize();
+  const theme = useTheme();
+  const upMd = windowWidth >= theme.breakpoints.values.md;
+  const classes = useStyles({ upMd });
 
   useLayoutEffect(() => {
     setWidth(parentRowRef.current?.offsetWidth || 0);
   }, [parentRowRef]);
 
+  function responsiveText(long: string, short: string): string {
+    return windowWidth >= theme.breakpoints.values.sm ? long : short;
+  }
+
   function Heading() {
     return (
       <div
+        ref={parentRowRef}
         style={{
           display: 'flex',
           padding: '0 7.5vw 7.5vw 7.5vw',
@@ -84,10 +44,10 @@ export default function FrontendWorks() {
         <h1
           id='works'
           style={{
-            color: 'rgb(12, 18, 72)',
+            color: theme.palette.primary.main,
             margin: 0,
             paddingBottom: '0 7.5vw',
-            width: windowWidth >= theme.breakpoints.values.md ? '80vw' : '100%',
+            width: upMd ? '80vw' : '100%',
           }}
         >
           Some Things I’ve Built 🔮
@@ -96,8 +56,47 @@ export default function FrontendWorks() {
     );
   }
 
-  function responsiveText(long: string, short: string): string {
-    return windowWidth >= theme.breakpoints.values.sm ? long : short;
+  function PreviewCardDesktopImg() {
+    const animShiftLandscape = { top: '35%', left: '42%' };
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'center',
+          marginTop: '1vw',
+          marginBottom: '70px',
+        }}
+      >
+        <a
+          style={{ marginBottom: '-5px' }}
+          href='https://dazzling-roentgen-c2c3a7.netlify.app/'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <ProgressiveImgWithFallback
+            src={
+              require('../assets/works/fem-stats-preview-card-desktop.webp')
+                .default
+            }
+            srcFallback={
+              require('../assets/works/fem-stats-preview-card-desktop.png')
+                .default
+            }
+            placeholder={
+              require('../assets/works/fem-stats-preview-card-desktop_lowres.webp')
+                .default
+            }
+            placeholderFallback={
+              require('../assets/works/fem-stats-preview-card-desktop_lowres.png')
+                .default
+            }
+            className={classes.imgDesktop}
+            animShift={animShiftLandscape}
+          />
+        </a>
+      </div>
+    );
   }
 
   return (
@@ -156,7 +155,7 @@ export default function FrontendWorks() {
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='left'
-        backgroundColor='rgb(178, 178, 178)'
+        backgroundColor={theme.palette.primary.light}
         href='https://calculator4711.s3.eu-central-1.amazonaws.com/index.html'
         imgProps={{
           src: require('../assets/works/calc.webp').default,
@@ -257,7 +256,7 @@ export default function FrontendWorks() {
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='left'
-        backgroundColor='rgb(178, 178, 178)'
+        backgroundColor={theme.palette.primary.light}
         href='https://reverent-benz-f8a629.netlify.app/'
         imgProps={{
           src: require('../assets/works/dionysos.webp').default,
@@ -302,139 +301,67 @@ export default function FrontendWorks() {
           , a headless CMS.
         </h3>
         <h3 style={{ color: theme.palette.primary.main }}>
-          <b>What I learned: render content dynamically from CMS</b>
+          <b>
+            What I learned: render content dynamically from CMS, recreate design
+            from figma
+          </b>
         </h3>
         <h3 style={{ color: theme.palette.primary.contrastText }}>
-          <i>React.js | sanity.io | Netlify</i>
+          <i>
+            {responsiveText(
+              'React.js | figma | sanity.io | Netlify',
+              'React.js | figma | sanity.io'
+            )}
+          </i>
         </h3>
       </WorksCard>
-      <div
-        ref={parentRowRef}
-        style={{
-          display: 'flex',
-          padding: '0 7.5vw',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          backgroundColor: 'limegreen',
+      <WorksCard
+        descriptionProps={{
+          title: responsiveText(
+            'Responsive Stats Preview Card',
+            'Preview Card'
+          ),
+          github: 'https://github.com/HansKre/fem-stats-preview-component',
         }}
+        parentWidth={parentRowWidth}
+        marginTop='7.5vw'
+        marginBottom='7.5vw'
+        imgSide='right'
+        backgroundColor='white'
+        href='https://dazzling-roentgen-c2c3a7.netlify.app/'
+        imgProps={{
+          src: require('../assets/works/fem-stats-preview-card-mobile.webp')
+            .default,
+          srcFallback:
+            require('../assets/works/fem-stats-preview-card-mobile.png')
+              .default,
+          placeholder:
+            require('../assets/works/fem-stats-preview-card-mobile_lowres.webp')
+              .default,
+          placeholderFallback:
+            require('../assets/works/fem-stats-preview-card-mobile_lowres.png')
+              .default,
+        }}
+        featuredContent={<PreviewCardDesktopImg />}
       >
-        {parentRowWidth && (
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              marginTop: `${MARGINS_TOP}px`,
-            }}
-          >
-            <Paper
-              elevation={12}
-              style={{
-                display: 'flex',
-                flex: '1 1 100%',
-                flexDirection: 'column',
-              }}
-            >
-              <h1 style={{ textAlign: 'center', marginBottom: '70px' }}>
-                Stats Preview Card
-              </h1>
-              <div style={{ display: 'flex' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    flex: '0 1 50%',
-                    alignItems: 'flex-end',
-                    height: '100%',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <h3
-                    style={{
-                      textAlign: 'end',
-                      paddingLeft: '70px',
-                      paddingTop: 0,
-                    }}
-                  >
-                    Yet another beautiful, responsive & reuseable react
-                    component.
-                  </h3>
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    flex: '0 1 50%',
-                    justifyContent: 'flex-start',
-                  }}
-                >
-                  <a
-                    style={{ marginBottom: '-5px' }}
-                    href='https://dazzling-roentgen-c2c3a7.netlify.app/'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    <ProgressiveImgWithFallback
-                      src={
-                        require('../assets/works/fem-stats-preview-card-mobile.webp')
-                          .default
-                      }
-                      srcFallback={
-                        require('../assets/works/fem-stats-preview-card-mobile.png')
-                          .default
-                      }
-                      placeholder={
-                        require('../assets/works/fem-stats-preview-card-mobile_lowres.webp')
-                          .default
-                      }
-                      placeholderFallback={
-                        require('../assets/works/fem-stats-preview-card-mobile_lowres.png')
-                          .default
-                      }
-                      className={`${classes.imgWorks} ${classes.portraitImg} ${classes.marginLeft}`}
-                      animShift={animShiftPortraitLeft}
-                    />
-                  </a>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  marginTop: `${MARGINS_TOP * 0.4}px`,
-                  marginBottom: '70px',
-                }}
-              >
-                <a
-                  style={{ marginBottom: '-5px' }}
-                  href='https://dazzling-roentgen-c2c3a7.netlify.app/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <ProgressiveImgWithFallback
-                    src={
-                      require('../assets/works/fem-stats-preview-card-desktop.webp')
-                        .default
-                    }
-                    srcFallback={
-                      require('../assets/works/fem-stats-preview-card-desktop.png')
-                        .default
-                    }
-                    placeholder={
-                      require('../assets/works/fem-stats-preview-card-desktop_lowres.webp')
-                        .default
-                    }
-                    placeholderFallback={
-                      require('../assets/works/fem-stats-preview-card-desktop_lowres.png')
-                        .default
-                    }
-                    className={`${classes.imgWorks} ${classes.landscapeImg} ${classes.marginLeft}`}
-                    animShift={animShiftLandscape}
-                  />
-                </a>
-              </div>
-            </Paper>
-          </div>
-        )}
-      </div>
+        <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
+          Another implementation-challenge from given images.
+        </h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
+          <b>
+            What I learned: estimate implementation time, assess typography by
+            eye
+          </b>
+        </h3>
+        <h3 style={{ color: theme.palette.primary.contrastText }}>
+          <i>
+            {responsiveText(
+              'React.js | Material-ui | Netlify',
+              'React.js | Material-ui'
+            )}
+          </i>
+        </h3>
+      </WorksCard>
     </div>
   );
 }

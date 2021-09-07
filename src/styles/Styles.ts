@@ -6,3 +6,8 @@ export const hoverable: CSSStyle = {
     transform: 'scale(1.04)',
   },
 };
+
+export const imgBase: CSSStyle = {
+  borderRadius: '10px',
+  position: 'relative',
+};
