@@ -139,7 +139,12 @@ export default function FrontendWorks() {
           </b>
         </h3>
         <h3 style={{ color: theme.palette.primary.contrastText }}>
-          <i>React.js | Material-ui | Netlify</i>
+          <i>
+            {responsiveText(
+              'React.js | Material-ui | Netlify',
+              'React.js | Material-ui'
+            )}
+          </i>
         </h3>
       </WorksCard>
       <WorksCard
@@ -174,7 +179,12 @@ export default function FrontendWorks() {
           <b>What I learned: CSS Grid Layout</b>
         </h3>
         <h3 style={{ color: theme.palette.primary.contrastText }}>
-          <i>React.js | CSS Grid | AWS S3</i>
+          <i>
+            {responsiveText(
+              'React.js | CSS Grid | AWS S3',
+              'React.js | CSS Grid | S3'
+            )}
+          </i>
         </h3>
       </WorksCard>
       <WorksCard
@@ -211,9 +221,10 @@ export default function FrontendWorks() {
               color: theme.palette.primary.main,
               fontSize: 'inherit',
               textDecoration: 'underline',
+              fontWeight: 'bold',
             }}
           >
-            www.carboninterface.com
+            carboninterface.com
           </a>
           -API. You can enter your weekly electricity usage to receive estimates
           of your carbon emissions.
@@ -225,7 +236,7 @@ export default function FrontendWorks() {
         <h3 style={{ color: theme.palette.primary.main }}>
           <b>
             What I learned: CSS specificity and customizing Material-UI
-            components.
+            components
           </b>
         </h3>
         <h3 style={{ color: theme.palette.primary.contrastText }}>
@@ -235,6 +246,66 @@ export default function FrontendWorks() {
               'Next.js | Material-UI'
             )}
           </i>
+        </h3>
+      </WorksCard>
+      <WorksCard
+        descriptionProps={{
+          title: responsiveText('Greek Restaurant', 'Dionysos'),
+          github: 'https://github.com/HansKre/dionysos-stuttgart-v3',
+        }}
+        parentWidth={parentRowWidth}
+        marginTop='7.5vw'
+        marginBottom='7.5vw'
+        imgSide='left'
+        backgroundColor='rgb(178, 178, 178)'
+        href='https://reverent-benz-f8a629.netlify.app/'
+        imgProps={{
+          src: require('../assets/works/dionysos.webp').default,
+          srcFallback: require('../assets/works/dionysos.png').default,
+          placeholder: require('../assets/works/dionysos_lowres.webp').default,
+          placeholderFallback: require('../assets/works/dionysos_lowres.png')
+            .default,
+        }}
+      >
+        <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
+          Responsive restaurant page with design inspiration from{' '}
+          <a
+            href='https://www.behance.net/'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{
+              color: theme.palette.primary.main,
+              fontSize: 'inherit',
+              textDecoration: 'underline',
+              fontWeight: 'bold',
+            }}
+          >
+            Behance
+          </a>
+          .
+        </h3>
+        <h3>
+          The entire menu, prices and news section are dynamically loaded from{' '}
+          <a
+            href='https://www.sanity.io/'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{
+              color: theme.palette.primary.main,
+              fontSize: 'inherit',
+              textDecoration: 'underline',
+              fontWeight: 'bold',
+            }}
+          >
+            sanity.io
+          </a>
+          , a headless CMS.
+        </h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
+          <b>What I learned: render content dynamically from CMS</b>
+        </h3>
+        <h3 style={{ color: theme.palette.primary.contrastText }}>
+          <i>React.js | sanity.io | Netlify</i>
         </h3>
       </WorksCard>
       <div
@@ -247,69 +318,6 @@ export default function FrontendWorks() {
           backgroundColor: 'limegreen',
         }}
       >
-        {parentRowWidth && (
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              marginTop: `${MARGINS_TOP}px`,
-            }}
-          >
-            <Paper elevation={12} style={{ display: 'flex', flex: '1 1 100%' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: '0 1 50%',
-                  alignItems: 'flex-end',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}
-              >
-                <h1 style={{ textAlign: 'end' }}>Greek Restaurant</h1>
-                <h3
-                  style={{
-                    textAlign: 'end',
-                    paddingLeft: '70px',
-                    paddingTop: 0,
-                  }}
-                >
-                  Responsive page for Dionysos Restaurant with design
-                  inspiration from <span>Behance</span>.
-                </h3>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flex: '0 1 50%',
-                  justifyContent: 'flex-start',
-                }}
-              >
-                <a
-                  style={{ marginBottom: '-5px' }}
-                  href='https://reverent-benz-f8a629.netlify.app/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <ProgressiveImgWithFallback
-                    src={require('../assets/works/dionysos.webp').default}
-                    srcFallback={
-                      require('../assets/works/dionysos.png').default
-                    }
-                    placeholder={
-                      require('../assets/works/dionysos_lowres.webp').default
-                    }
-                    placeholderFallback={
-                      require('../assets/works/dionysos_lowres.png').default
-                    }
-                    className={`${classes.imgWorksScaled} ${classes.portraitImg} ${classes.marginLeft}`}
-                    animShift={animShiftPortraitLeft}
-                  />
-                </a>
-              </div>
-            </Paper>
-          </div>
-        )}
         {parentRowWidth && (
           <div
             style={{
