@@ -169,7 +169,7 @@ export default function FrontendWorks() {
           My goal was to create an interactive UI to showcase React’s
           capabilities for passing data between child-ccomponents using props.
         </h3>
-        <h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
           I found that creating the Calculator-Layout with CSS Flexbox was
           really tedious and required many div-wrappers so I ended up using CSS
           Grid instead.
@@ -228,7 +228,7 @@ export default function FrontendWorks() {
           -API. You can enter your weekly electricity usage to receive estimates
           of your carbon emissions.
         </h3>
-        <h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
           To avoid my API-key being exposed, I proxied all API-requests using
           Netlify-functions through Next.js.
         </h3>
@@ -283,7 +283,7 @@ export default function FrontendWorks() {
           </a>
           .
         </h3>
-        <h3>
+        <h3 style={{ color: theme.palette.primary.main }}>
           The entire menu, prices and news section are dynamically loaded from{' '}
           <a
             href='https://www.sanity.io/'
