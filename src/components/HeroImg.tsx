@@ -1,5 +1,7 @@
 /* eslint-disable global-require */
 import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core';
+
 import useWindowWidth from '../hooks/useWindowWidth';
 import { CSSStyle } from '../types/types';
 import ProgressiveImgWithFallback from './ProgressiveImgWithFallback';
@@ -10,19 +12,21 @@ const imgBase: CSSStyle = {
 };
 
 const useStyles = makeStyles({
-  img: {
+  img: (props: { upSm: boolean }) => ({
     ...imgBase,
     width: '100%',
     height: 'auto',
     borderRadius: '34px',
     mixBlendMode: 'screen',
-    paddingTop: '1vw',
-  },
+    paddingTop: props.upSm ? 0 : '1vw',
+  }),
 });
 
 export default function HeroImg() {
   const windowWidth = useWindowWidth();
-  const classes = useStyles({ windowWidth });
+  const theme = useTheme();
+  const upSm = windowWidth >= theme.breakpoints.values.sm;
+  const classes = useStyles({ upSm });
   const animShiftDesktop = { top: '40%', left: '45%' };
   return (
     <ProgressiveImgWithFallback
