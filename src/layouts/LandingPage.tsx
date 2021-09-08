@@ -128,7 +128,7 @@ export default function LandingPage() {
           <h4>
             Hello there 👋, <span>I’m Hans.</span>
           </h4>
-          <h1 style={{ marginTop: 0 }}>
+          <h1 id='home' style={{ marginTop: 0 }}>
             <span>
               Front End <i className='label'>Developer</i>,
             </span>{' '}
