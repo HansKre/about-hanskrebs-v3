@@ -27,9 +27,6 @@ const hoverableScaled: CSSStyle = {
   },
 };
 
-const animShiftPortraitRight = { top: '35%', left: '30%' };
-const animShiftPortraitLeft = { top: '35%', left: '30%' };
-
 const useStyles = makeStyles({
   imgWorksScaled: {
     ...imgBase,
@@ -48,6 +45,13 @@ export default function WorksCardImg(props: Props) {
   const theme = useTheme();
   const downXs = windowWidth < theme.breakpoints.values.xs;
   const classes = useStyles({ downXs });
+
+  const animShiftPortraitRight = downXs
+    ? { top: '35%', left: '21%' }
+    : { top: '35%', left: '30%' };
+  const animShiftPortraitLeft = downXs
+    ? { top: '35%', left: '21%' }
+    : { top: '35%', left: '30%' };
 
   return (
     <a
