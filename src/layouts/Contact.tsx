@@ -30,6 +30,42 @@ export default function Contact() {
   const { width: windowWidth } = useWindowSize();
   const upMd = windowWidth >= theme.breakpoints.values.md;
   const classes = useStyles({ upMd });
+
+  function SocialIcons() {
+    return (
+      <div style={{ display: 'flex', flex: 1 }}>
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <SocialIcon
+            bgColor={theme.palette.secondary.light}
+            className={`${classes.hoverableSocial}`}
+            url='https://github.com/hanskre'
+            target='_blank'
+            rel='noopener noreferrer'
+          />
+          <SocialIcon
+            className={`${classes.hoverableSocial}`}
+            url='https://www.linkedin.com/in/hans-krebs-63b35034/'
+            target='_blank'
+            rel='noopener noreferrer'
+          />
+          <SocialIcon
+            className={`${classes.hoverableSocial}`}
+            url='https://www.instagram.com/hanso711/'
+            target='_blank'
+            rel='noopener noreferrer'
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -72,41 +108,7 @@ export default function Contact() {
           xs={12}
           style={{ marginTop: '2em' }}
         >
-          {/* <h2 style={{color: "#48484a"}}>Social Networks</h2> */}
-          <div style={{ display: 'flex', flex: 1 }}>
-            <div
-              style={{
-                flex: 1,
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingRight: '4rem',
-              }}
-            >
-              <SocialIcon
-                // style={{ height: '2.4em', width: '2.4em' }}
-                bgColor={theme.palette.secondary.light}
-                className={`${classes.hoverableSocial}`}
-                url='https://github.com/hanskre'
-                target='_blank'
-                rel='noopener noreferrer'
-              />
-              <SocialIcon
-                // style={{ height: '2.4em', width: '2.4em' }}
-                className={`${classes.hoverableSocial}`}
-                url='https://www.linkedin.com/in/hans-krebs-63b35034/'
-                target='_blank'
-                rel='noopener noreferrer'
-              />
-              <SocialIcon
-                // style={{ height: '2.4em', width: '2.4em' }}
-                className={`${classes.hoverableSocial}`}
-                url='https://www.instagram.com/hanso711/'
-                target='_blank'
-                rel='noopener noreferrer'
-              />
-            </div>
-          </div>
+          <SocialIcons />
         </Grid>
       </Grid>
     </div>
