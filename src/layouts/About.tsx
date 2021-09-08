@@ -53,10 +53,10 @@ export default function About() {
         and being outdoor 🌿.
       </h3>
       <h3>
-        Photography naturally complements the eye for detail, lines,
-        composition, symmetry and proportions. For me, it’s about capturing the
-        moment, beauty and wonders of our amazing world while being creative.
-        It’s such an amazing art.
+        Photography naturally complements eye for detail, lines, composition,
+        symmetry and proportions. For me, it’s about capturing the moment,
+        beauty and wonders of our amazing world while being creative. It’s such
+        an amazing art.
       </h3>
       <HeroImg />
     </div>
