@@ -37,9 +37,7 @@ const useStyles = makeStyles({
     transform: 'scale(1.25)',
   },
   portraitImg: (props: { downXs: boolean }) => ({
-    height: props.downXs
-      ? `${window.visualViewport.height * 0.3}px`
-      : `${window.visualViewport.height * 0.6}px`,
+    height: props.downXs ? '30vh' : '60vh',
   }),
 });
 
