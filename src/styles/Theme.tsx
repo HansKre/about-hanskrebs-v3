@@ -1,7 +1,7 @@
 import { createTheme } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 
-const MAIN_THEME_COLORS = [
+const MAIN_PALETTE = [
   'rgb(12, 18, 72)',
   'rgb(178, 178, 178)',
   'rgb(208, 55, 55)',
@@ -31,13 +31,13 @@ declare module '@material-ui/core/styles/createBreakpoints' {
 const CustomTheme = createTheme({
   palette: {
     primary: {
-      main: MAIN_THEME_COLORS[0],
-      light: MAIN_THEME_COLORS[1],
-      contrastText: MAIN_THEME_COLORS[2],
+      main: MAIN_PALETTE[0],
+      light: MAIN_PALETTE[1],
+      contrastText: MAIN_PALETTE[2],
     },
     secondary: {
-      main: MAIN_THEME_COLORS[4],
-      light: MAIN_THEME_COLORS[3],
+      main: MAIN_PALETTE[4],
+      light: MAIN_PALETTE[3],
     },
   },
   typography: {
