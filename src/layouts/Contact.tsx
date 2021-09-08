@@ -12,13 +12,14 @@ const useStyles = makeStyles({
       transform: 'scale(1.15)',
     },
   },
-  hoverableLink: {
+  hoverableBtn: {
     ...hoverable,
     backgroundColor: 'Transparent',
     border: 'none',
     cursor: 'pointer',
     outline: 'none',
     alignSelf: 'flex-start',
+    padding: 0,
     '&:hover': {
       transform: 'scale(1.10)',
     },
@@ -84,7 +85,7 @@ export default function Contact() {
             Feel free to reach me out if you’re looking for a developer, have a
             question, or just want to connect.
           </h3>
-          <button type='button' className={`${classes.hoverableLink}`}>
+          <button type='button' className={`${classes.hoverableBtn}`}>
             <h3>
               <a
                 style={{
