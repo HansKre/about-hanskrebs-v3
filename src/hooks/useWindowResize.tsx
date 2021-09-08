@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 /**
- *
+ * Listens for `resize`-event of the window and returns window.innerWidth.
+ * Note: every width-change is a state-change and hence a re-render!
  * @returns current window width and height
  */
 export default function useWindowSize() {
