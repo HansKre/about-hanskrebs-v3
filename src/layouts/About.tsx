@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import heroImg from '../assets/IMG_9921_matte_look_1440.jpeg';
 import heroImgMobile from '../assets/IMG_9921_matte_look_avatar.jpeg';
-import useWindowSize from '../hooks/useWindowResize';
+import useWindowWidthSize from '../hooks/useWindowWidthSize';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -24,9 +24,10 @@ const useStyles = makeStyles({
 
 export default function About() {
   const classes = useStyles();
-  const { width: windowWidth } = useWindowSize();
+  const windowWidth = useWindowWidthSize();
   const theme = useTheme();
   const upAvatar = windowWidth >= theme.breakpoints.values.avatar;
+  const upSm = windowWidth >= theme.breakpoints.values.sm;
 
   function ResponsiveImg() {
     const imgResponsiveStyle = () => {
@@ -96,17 +97,10 @@ export default function About() {
           direction='column'
           xs={12}
           sm={6}
-          className={
-            windowWidth >= theme.breakpoints.values.sm
-              ? classes.fullVhColumns
-              : classes.halfVh
-          }
+          className={upSm ? classes.fullVhColumns : classes.halfVh}
           style={{
             height: '100%',
-            padding:
-              windowWidth >= theme.breakpoints.values.sm
-                ? '7.5vw 7.5vw 7.5vw 7.5vw'
-                : '10% 15% 1vw 15%',
+            padding: upSm ? '7.5vw 7.5vw 7.5vw 7.5vw' : '10% 15% 1vw 15%',
             flexWrap: 'nowrap',
           }}
         >
@@ -135,17 +129,10 @@ export default function About() {
           direction='column'
           xs={12}
           sm={6}
-          className={
-            windowWidth >= theme.breakpoints.values.sm
-              ? classes.fullVhColumns
-              : classes.halfVh
-          }
+          className={upSm ? classes.fullVhColumns : classes.halfVh}
           style={{
             height: '100%',
-            padding:
-              windowWidth >= theme.breakpoints.values.sm
-                ? '7.5vw 7.5vw 7.5vw 7.5vw'
-                : '1vw 15% 7.5vw 15%',
+            padding: upSm ? '7.5vw 7.5vw 7.5vw 7.5vw' : '1vw 15% 7.5vw 15%',
             flexWrap: 'nowrap',
           }}
         >
