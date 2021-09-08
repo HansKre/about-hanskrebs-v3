@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   imgDesktop: (props: { upMd: boolean; windowWidth: number }) => ({
     ...imgBase,
     ...hoverable,
-    width: props.upMd ? '70vw' : `${props.windowWidth * 0.95}px`,
+    width: props.upMd ? '70vw' : `${props.windowWidth * 0.85}px`,
   }),
 });
 
