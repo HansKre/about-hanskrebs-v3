@@ -91,7 +91,7 @@ span {
 }
 
 .label {
-  color: rgb(208, 55, 55);
+  color: rgb(198, 12, 56);
 }
 /*  ============
     Layout
@@ -139,12 +139,7 @@ span {
     Components
     ============ */
 
-button,
-input {
+button {
   font-family: var(--secondary-font);
   font-size: var(--min-font-size);
-}
-
-input {
-  background-color: rgb(178, 178, 178);
 }

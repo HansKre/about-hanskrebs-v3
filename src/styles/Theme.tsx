@@ -1,13 +1,25 @@
 import { createTheme } from '@material-ui/core/styles';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 
-const MAIN_PALETTE = [
+/* Left for reference purpose */
+export const MAIN_PALETTE = [
   'rgb(12, 18, 72)',
   'rgb(178, 178, 178)',
   'rgb(208, 55, 55)',
   'rgb(247, 247, 247)',
   'rgb(255, 255, 255)',
 ];
+
+export enum MainPalette {
+  darkBlue = 'rgb(12, 18, 72)',
+  lightBlue = 'rgb(0, 43, 92)',
+  darkRed = 'rgb(198, 12, 56)',
+  deprecatedRed = 'rgb(208, 55, 55)',
+  grey = 'rgb(178, 178, 178)',
+  silver = 'rgb(178, 183, 187)',
+  lightGrey = 'rgb(247, 247, 247)',
+  white = 'rgb(255, 255, 255)',
+}
 
 /** Material-UI Default Breakpoint Values:
     xs, extra-small: 0px
@@ -31,13 +43,14 @@ declare module '@material-ui/core/styles/createBreakpoints' {
 const CustomTheme = createTheme({
   palette: {
     primary: {
-      main: MAIN_PALETTE[0],
-      light: MAIN_PALETTE[1],
-      contrastText: MAIN_PALETTE[2],
+      dark: MainPalette.darkBlue,
+      main: MainPalette.lightBlue,
+      light: MainPalette.grey,
+      contrastText: MainPalette.darkRed,
     },
     secondary: {
-      main: MAIN_PALETTE[4],
-      light: MAIN_PALETTE[3],
+      main: MainPalette.white,
+      light: MainPalette.lightGrey,
     },
   },
   typography: {
