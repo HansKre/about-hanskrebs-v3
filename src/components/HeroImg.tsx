@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     width: '100%',
     height: 'auto',
     borderRadius: '34px',
-    mixBlendMode: 'screen',
+    mixBlendMode: 'luminosity',
     paddingTop: props.upSm ? 0 : '1vw',
     ...hoverable,
     '&:hover': {
