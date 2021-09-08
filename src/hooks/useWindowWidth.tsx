@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
  * https://stackoverflow.com/questions/12009367/javascript-event-handling-scroll-event-with-a-delay
  * @returns current window width and height
  */
-export default function useWindowWidthSize() {
+export default function useWindowWidth() {
   const [width, setWidth] = useState(0);
   useEffect(() => {
     function handleResize() {

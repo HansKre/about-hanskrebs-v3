@@ -30,7 +30,7 @@ export default function FrontendWorks() {
       <div
         style={{
           display: 'flex',
-          padding: downXs ? '0 7.5vw 0vw 7.5vw' : '0 7.5vw 7.5vw 7.5vw',
+          padding: downXs ? '0 7.5vw 0vw 7.5vw' : '0 7.5vw 0vw 7.5vw',
           justifyContent: 'center',
         }}
       >

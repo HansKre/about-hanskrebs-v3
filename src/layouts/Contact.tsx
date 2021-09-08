@@ -78,7 +78,7 @@ export default function Contact() {
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <h1 id='contact'>Let’s Build Something Together 👋</h1>
+      <h1 id='contact'>Let’s Build Something Together 🤝</h1>
       <Grid container>
         <Grid item container direction='column' xs={12}>
           <h3 style={{ paddingTop: 0 }}>

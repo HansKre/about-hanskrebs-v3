@@ -55,6 +55,8 @@ gif2webp animated.gif -o animated.webp
 ```bash
 # all png-files
 for filename in *.png; do cwebp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
+# all jpg-files
+for filename in *.jpg; do cwebp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
 # all png-files with _lowres suffix
 for filename in *_lowres.png; do cwebp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
 ```
