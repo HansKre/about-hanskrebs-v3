@@ -1,27 +1,12 @@
 /* eslint-disable object-curly-newline */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {
-  motion,
-  useAnimation,
-  useViewportScroll,
-  useTransform,
-} from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import Burger from '../components/Burger';
-import LogoComponent from '../components/Logo.Component';
+import Logo from '../components/Logo.Component';
 import useBreakPoint from '../hooks/useBreakPoint';
-
-const animationVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
+import * as AnimationVariants from '../styles/AnimationVariants';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -39,6 +24,19 @@ const useStyles = makeStyles({
     maxHeight: '60vh',
     overflow: 'hidden' /* hide overflow of padding-bottom for large content */,
   },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: '100%',
+    width: '100%',
+    transformOrigin: 'top',
+    pointerEvents: 'none',
+    backgroundColor: 'black',
+    zIndex: 2,
+  },
 });
 
 /**
@@ -54,13 +52,11 @@ export default function LandingPage() {
   const downSm = useBreakPoint('down', 'sm');
   const upSm = useBreakPoint('up', 'sm');
   const upMd = useBreakPoint('up', 'md');
-  const controls = useAnimation();
-  const { ref, inView } = useInView({ threshold: 0.2 });
   const [scale, setScale] = useState(1);
 
   const { scrollY } = useViewportScroll();
 
-  const transformedY = useTransform(
+  const scalingMotion = useTransform(
     scrollY,
     [0, window.innerHeight],
     [1, 1.5],
@@ -69,34 +65,22 @@ export default function LandingPage() {
     }
   );
 
-  const opacity = useTransform(scrollY, [0, window.innerHeight / 2], [1, 0]);
-
-  transformedY.onChange(() => setScale(transformedY.get()));
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-    if (!inView) {
-      controls.start('hidden');
-    }
-  }, [controls, inView]);
+  scalingMotion.onChange(() => setScale(scalingMotion.get()));
 
   return (
-    <motion.div
-      ref={ref}
-      className='Box'
-      initial='hidden'
-      animate={controls}
-      variants={animationVariants}
-      style={{ opacity }}
-    >
+    <div>
       <Grid
         container
         style={{
           overflow: 'hidden',
         }}
       >
+        <motion.div
+          variants={AnimationVariants.curtainsUp}
+          initial='expanded'
+          animate='shrunk'
+          className={classes.background}
+        />
         <Grid
           item
           container
@@ -109,7 +93,7 @@ export default function LandingPage() {
             transform: `scale(${scale})`,
           }}
         >
-          <LogoComponent />
+          <Logo />
         </Grid>
         <Grid
           item
@@ -124,7 +108,10 @@ export default function LandingPage() {
             transform: `scale(${scale})`,
           }}
         >
-          <nav
+          <motion.nav
+            variants={AnimationVariants.fadeInLater}
+            initial='fading'
+            animate='faded'
             style={{
               position: 'absolute',
               boxSizing:
@@ -148,34 +135,59 @@ export default function LandingPage() {
             ) : (
               <Burger />
             )}
-          </nav>
-          <div
-            style={{
-              display: 'flex',
-              flex: '1 1 100%',
-              flexDirection: 'column',
-              padding: upSm
-                ? '15%'
-                : '0 15% 0' /* don't use vw to avoid padding-overflow! */,
-              ...(downSm && {
-                height: '100%',
-                justifyContent: 'center',
-              }),
-            }}
+          </motion.nav>
+          <motion.div
+            variants={AnimationVariants.deScale}
+            initial='zoomed'
+            animate='normal'
           >
-            <h4>
-              Hello there 👋, <span>I’m Hans.</span>
-            </h4>
-            <h1 id='home' style={{ marginTop: 0 }}>
-              <span>
-                Front End <i className='label'>Developer</i>,
-              </span>{' '}
-              Software Architect, and Photographer.
-            </h1>
-            <h4>Welcome To My About Me Page!</h4>
-          </div>
+            <motion.div
+              variants={AnimationVariants.fadeIn}
+              initial='fading'
+              animate='faded'
+              style={{
+                display: 'flex',
+                flex: '1 1 100%',
+                flexDirection: 'column',
+                padding: upSm
+                  ? '15%'
+                  : '0 15% 0' /* don't use vw to avoid padding-overflow! */,
+                ...(downSm && {
+                  height: '100%',
+                  justifyContent: 'center',
+                }),
+              }}
+            >
+              <motion.h4
+                variants={AnimationVariants.h4First}
+                initial='entering'
+                animate='entered'
+              >
+                Hello there 👋, <span>I’m Hans.</span>
+              </motion.h4>
+              <motion.h1
+                variants={AnimationVariants.h1}
+                initial='entering'
+                animate='entered'
+                id='home'
+                style={{ marginTop: 0 }}
+              >
+                <span>
+                  Front End <i className='label'>Developer</i>,
+                </span>{' '}
+                Software Architect, and Photographer.
+              </motion.h1>
+              <motion.h4
+                variants={AnimationVariants.h4Second}
+                initial='entering'
+                animate='entered'
+              >
+                Welcome To My About Me Page!
+              </motion.h4>
+            </motion.div>
+          </motion.div>
         </Grid>
       </Grid>
-    </motion.div>
+    </div>
   );
 }
