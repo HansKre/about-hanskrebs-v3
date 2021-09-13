@@ -91,7 +91,12 @@ export default function LandingPage() {
       variants={animationVariants}
       style={{ opacity }}
     >
-      <Grid container>
+      <Grid
+        container
+        style={{
+          overflow: 'hidden',
+        }}
+      >
         <Grid
           item
           container
