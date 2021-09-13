@@ -1,8 +1,8 @@
 import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import mainLogo from '../assets/main-logo-400x400.png';
 import Burger from '../components/Burger';
-import useWindowSize from '../hooks/useWindowResize';
+import LogoComponent from '../components/Logo.Component';
+import useBreakPoint from '../hooks/useBreakPoint';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -32,7 +32,9 @@ const useStyles = makeStyles({
 export default function LandingPage() {
   const classes = useStyles();
   const theme = useTheme();
-  const { width: windowWidth } = useWindowSize();
+  const downSm = useBreakPoint('down', 'sm');
+  const upSm = useBreakPoint('up', 'sm');
+  const upMd = useBreakPoint('up', 'md');
 
   return (
     <Grid container>
@@ -43,24 +45,9 @@ export default function LandingPage() {
         alignItems='center'
         xs={12}
         sm={6}
-        className={
-          windowWidth >= theme.breakpoints.values.sm
-            ? classes.fullVh
-            : classes.topHalf
-        }
+        className={upSm ? classes.fullVh : classes.topHalf}
       >
-        <img
-          src={mainLogo}
-          alt={mainLogo}
-          style={{
-            width:
-              windowWidth >= theme.breakpoints.values.sm ? '25rem' : '40vh',
-            height:
-              windowWidth >= theme.breakpoints.values.sm ? '25rem' : '40vh',
-            position: 'relative',
-            top: '-0.25vw' /* visually align with welcome-text on the right */,
-          }}
-        />
+        <LogoComponent />
       </Grid>
       <Grid
         item
@@ -69,11 +56,7 @@ export default function LandingPage() {
         alignItems='center'
         xs={12}
         sm={6}
-        className={
-          windowWidth >= theme.breakpoints.values.sm
-            ? classes.fullVh
-            : classes.bottomHalf
-        }
+        className={upSm ? classes.fullVh : classes.bottomHalf}
         style={{
           backgroundColor: theme.palette.primary.main,
         }}
@@ -85,21 +68,14 @@ export default function LandingPage() {
               'border-box' /* Safari-fix, seems to ignore border-box from root when 'position: absolute' is set */,
             top: 0,
             right: 0 /* Chrome-fix for Windows */,
-            width:
-              windowWidth >= theme.breakpoints.values.sm ? '50vw' : '100vw',
+            width: upSm ? '50vw' : '100vw',
             display: 'flex',
-            placeContent:
-              windowWidth >= theme.breakpoints.values.md
-                ? 'center space-between'
-                : 'center flex-end',
+            placeContent: upMd ? 'center space-between' : 'center flex-end',
             alignItems: 'center',
-            padding:
-              windowWidth >= theme.breakpoints.values.sm
-                ? '1vw 7.5% 0 7.5%'
-                : '1vw 15% 0 15%',
+            padding: upSm ? '1vw 7.5% 0 7.5%' : '1vw 15% 0 15%',
           }}
         >
-          {windowWidth >= theme.breakpoints.values.md ? (
+          {upMd ? (
             <>
               <a href='#about'>ABOUT</a>
               <a href='#works'>WORKS</a>
@@ -115,11 +91,10 @@ export default function LandingPage() {
             display: 'flex',
             flex: '1 1 100%',
             flexDirection: 'column',
-            padding:
-              windowWidth >= theme.breakpoints.values.sm
-                ? '15%'
-                : '0 15% 0' /* don't use vw to avoid padding-overflow! */,
-            ...(windowWidth < theme.breakpoints.values.sm && {
+            padding: upSm
+              ? '15%'
+              : '0 15% 0' /* don't use vw to avoid padding-overflow! */,
+            ...(downSm && {
               height: '100%',
               justifyContent: 'center',
             }),
