@@ -65,7 +65,7 @@ export default function LandingPage() {
     }
   );
 
-  const opacity = useTransform(scrollY, [0, window.innerHeight], [1, 0], {
+  const opacity = useTransform(scrollY, [0, window.innerHeight], [1, 0.6], {
     clamp: true,
   });
 
