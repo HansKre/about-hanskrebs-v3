@@ -5,6 +5,7 @@ import ProgressiveImgWithFallback from '../components/ProgressiveImgWithFallback
 import { hoverable, imgBase } from '../styles/Styles';
 import WorksCard from '../components/WorksCard';
 import useWindowSize from '../hooks/useWindowResize';
+import ParallaxBackground from '../components/ParallaxBackground';
 
 const useStyles = makeStyles({
   imgDesktop: (props: { upMd: boolean; windowWidth: number }) => ({
@@ -97,8 +98,10 @@ export default function FrontendWorks() {
         display: 'flex',
         padding: '7.5vw 0',
         flexDirection: 'column',
+        position: 'relative',
       }}
     >
+      <ParallaxBackground />
       <Heading />
       <WorksCard
         descriptionProps={{
@@ -107,6 +110,7 @@ export default function FrontendWorks() {
         }}
         marginBottom='7.5vw'
         imgSide='right'
+        backgroundColor='white'
         href='https://vigorous-wright-d3c341.netlify.app/'
         imgProps={{
           src: require('../assets/works/fem-order-summary.webp').default,
@@ -154,6 +158,7 @@ export default function FrontendWorks() {
           placeholderFallback: require('../assets/works/calc_lowres.gif')
             .default,
         }}
+        zIndex={1}
       >
         <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
           My goal was to create an interactive UI to showcase React’s

@@ -21,6 +21,7 @@ type DescriptionProps = {
 type Props = {
   marginTop?: string;
   marginBottom?: string;
+  zIndex?: number;
   imgSide: keyof typeof ImgSides;
   backgroundColor?: string;
   href: string;
@@ -30,7 +31,7 @@ type Props = {
   featuredContent?: ReactNode;
 };
 
-export default function WorksCard(props: Props) {
+export default function WorksCard(props: Props & Record<string, any>) {
   // eslint-disable-next-line object-curly-newline
   const {
     marginTop,
@@ -42,6 +43,8 @@ export default function WorksCard(props: Props) {
     descriptionProps,
     children,
     featuredContent,
+    zIndex,
+    ...rest
   } = props;
   //
   const { width: windowWidth } = useWindowSize();
@@ -56,12 +59,14 @@ export default function WorksCard(props: Props) {
         padding: '0 7.5vw',
         justifyContent: 'center',
         backgroundColor,
+        zIndex,
       }}
     >
       <Paper
         elevation={12}
         style={{
           display: 'flex',
+          zIndex: zIndex || 0 + 1,
           flexDirection:
             ImgSides[imgSide] === ImgSides.left ? 'row' : 'row-reverse',
           width: upMd ? '80vw' : '100%',

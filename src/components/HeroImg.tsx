@@ -15,6 +15,7 @@ const imgBase: CSSStyle = {
 const useStyles = makeStyles({
   img: (props: { upSm: boolean }) => ({
     ...imgBase,
+    zIndex: 1,
     width: '100%',
     height: 'auto',
     borderRadius: '34px',

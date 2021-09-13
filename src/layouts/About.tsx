@@ -14,6 +14,7 @@ export default function About() {
         columnGap: '7.5vw',
         padding: upSm ? '7.5vw 7.5vw 7.5vw 7.5vw' : '10% 15% 7.5vw 15%',
         backgroundColor: theme.palette.primary.dark,
+        zIndex: 1,
       }}
     >
       <h1
