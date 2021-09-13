@@ -65,10 +65,18 @@ export default function LandingPage() {
     }
   );
 
+  const opacity = useTransform(scrollY, [0, window.innerHeight], [1, 0], {
+    clamp: true,
+  });
+
   scalingMotion.onChange(() => setScale(scalingMotion.get()));
 
   return (
-    <div>
+    <motion.div
+      style={{
+        opacity,
+      }}
+    >
       <Grid
         container
         style={{
@@ -105,7 +113,6 @@ export default function LandingPage() {
           className={upSm ? classes.fullVh : classes.bottomHalf}
           style={{
             backgroundColor: theme.palette.primary.main,
-            transform: `scale(${scale})`,
           }}
         >
           <motion.nav
@@ -156,6 +163,7 @@ export default function LandingPage() {
                   height: '100%',
                   justifyContent: 'center',
                 }),
+                transform: `scale(${scale})`,
               }}
             >
               <motion.h4
@@ -188,6 +196,6 @@ export default function LandingPage() {
           </motion.div>
         </Grid>
       </Grid>
-    </div>
+    </motion.div>
   );
 }
