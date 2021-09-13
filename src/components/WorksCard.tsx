@@ -44,7 +44,6 @@ export default function WorksCard(props: Props & Record<string, any>) {
     children,
     featuredContent,
     zIndex,
-    ...rest
   } = props;
   //
   const { width: windowWidth } = useWindowSize();
