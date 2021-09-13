@@ -48,8 +48,8 @@
     "test:cypress:open": "(npm run prod &) && (cypress open)",
     "test:cypress:run": "(npm run prod &) && (cypress run --browser chrome)",
     "test": "npm run test:testing-library:run && npm run test:cypress:run",
-    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --cache",
+    "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --cache --fix"
   },
   "eslintConfig": {
     "extends": [

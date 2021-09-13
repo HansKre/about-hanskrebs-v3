@@ -253,3 +253,29 @@ dist
   "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
 }
 ```
+
+## Improve ESLint Performance
+
+### Analyse current performance
+
+```bash
+$TIMING=1 npm run lint
+# or `TIMING=1 eslint` if it is installed globally.
+Rule                               | Time (ms) | Relative
+:----------------------------------|----------:|--------:
+@typescript-eslint/no-implied-eval |  5763.875 |    92.2%
+import/no-cycle                    |   116.765 |     1.9%
+@typescript-eslint/indent          |    54.890 |     0.9%
+no-unused-vars                     |    26.089 |     0.4%
+import/no-extraneous-dependencies  |    22.567 |     0.4%
+@typescript-eslint/no-redeclare    |    20.651 |     0.3%
+import/extensions                  |    17.254 |     0.3%
+no-redeclare                       |    15.520 |     0.2%
+react/no-unused-prop-types         |     7.384 |     0.1%
+react/jsx-fragments                |     6.872 |     0.1%
+```
+
+### Improving performance
+
+1) deactivate rules (at least during development to improve lint-on-typing experience)
+2) Use `--cache` option

@@ -17,7 +17,8 @@
     },
     "ecmaVersion": 12,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "createDefaultProgram": false
   },
   "plugins": [
     "jsx-a11y",
@@ -53,6 +54,10 @@
         "ImportDeclaration": "never",
         "ExportDeclaration": { "multiline": true, "minProperties": 3 }
       }
-    ]
+    ],
+    // off due to performance issues with this rule
+    // TODO: create separate configuration for production by extending
+    // https://eslint.org/docs/2.0.0/user-guide/configuring
+    "@typescript-eslint/no-implied-eval": "off"
   }
 }

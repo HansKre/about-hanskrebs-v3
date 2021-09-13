@@ -24,3 +24,6 @@ yarn-error.log*
 
 *.mp4
 not_used
+
+# ignore eslintcache and make sure to execute all ESLint rules during build process
+.eslintcache
