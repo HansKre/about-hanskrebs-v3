@@ -1,6 +1,6 @@
 import { useTheme } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+import useWindowSize from './useWindowResize';
 import Theme from '../styles/Theme';
 
 type Limit = 'up' | 'down' | 'between' | 'only';
@@ -12,9 +12,23 @@ function useBreakPoint(
   theme?: typeof Theme
 ): boolean {
   const contextTheme = useTheme();
-  return useMediaQuery(
-    (theme || contextTheme).breakpoints[limit](start, end || start)
-  );
+  const { width: windowWidth } = useWindowSize();
+  if (limit === 'only') {
+    return windowWidth === (theme || contextTheme).breakpoints.values[start];
+  }
+  if (limit === 'up') {
+    return windowWidth >= (theme || contextTheme).breakpoints.values[start];
+  }
+  if (limit === 'down') {
+    return windowWidth < (theme || contextTheme).breakpoints.values[start];
+  }
+  if (limit === 'between' && end) {
+    return (
+      windowWidth >= (theme || contextTheme).breakpoints.values[start] &&
+      windowWidth < (theme || contextTheme).breakpoints.values[end]
+    );
+  }
+  return false;
 }
 
 export default useBreakPoint;
