@@ -12,7 +12,7 @@ export default function About() {
       style={{
         columnCount: upSm ? 2 : 1,
         columnGap: '7.5vw',
-        padding: upSm ? '7.5vw 7.5vw 7.5vw 7.5vw' : '10% 15% 7.5vw 15%',
+        padding: upSm ? '7.5vw 7.5vw 7.5vw 7.5vw' : '10% 16px 7.5vw 32px',
         backgroundColor: theme.palette.primary.dark,
         zIndex: 1,
       }}
