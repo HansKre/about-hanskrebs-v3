@@ -1,17 +1,28 @@
 /* eslint-disable global-require */
 import { makeStyles } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core';
+import { useTheme, Theme } from '@material-ui/core';
 import ProgressiveImgWithFallback from '../components/ProgressiveImgWithFallback';
 import { hoverable, imgBase } from '../styles/Styles';
 import WorksCard from '../components/WorksCard';
 import useWindowSize from '../hooks/useWindowResize';
 import ParallaxBackground from '../components/ParallaxBackground';
 
+type StyleProps = {
+  upMd: boolean;
+  downXs: boolean;
+  windowWidth: number;
+  theme: Theme;
+};
+
 const useStyles = makeStyles({
-  imgDesktop: (props: { upMd: boolean; windowWidth: number }) => ({
+  imgDesktop: ({ upMd, windowWidth }: StyleProps) => ({
     ...imgBase,
     ...hoverable,
-    width: props.upMd ? '70vw' : `${props.windowWidth * 0.85}px`,
+    width: upMd ? '70vw' : `${windowWidth * 0.85}px`,
+  }),
+  technologies: ({ theme, downXs }: StyleProps) => ({
+    color: theme.palette.primary.contrastText,
+    textAlign: downXs ? 'center' : 'initial',
   }),
 });
 
@@ -20,7 +31,7 @@ export default function FrontendWorks() {
   const theme = useTheme();
   const upMd = windowWidth >= theme.breakpoints.values.md;
   const downXs = windowWidth < theme.breakpoints.values.xs;
-  const classes = useStyles({ upMd, windowWidth });
+  const classes = useStyles({ upMd, downXs, theme, windowWidth });
 
   function responsiveText(long: string, short: string): string {
     return windowWidth >= theme.breakpoints.values.sm ? long : short;
@@ -132,7 +143,7 @@ export default function FrontendWorks() {
             and aligning items with CSS, improved my eye for detail
           </b>
         </h3>
-        <h3 style={{ color: theme.palette.primary.contrastText }}>
+        <h3 className={classes.technologies}>
           <i>
             {responsiveText(
               'React.js | Material-ui | Netlify',
@@ -172,7 +183,7 @@ export default function FrontendWorks() {
         <h3 style={{ color: theme.palette.primary.main }}>
           <b>What I learned: CSS Grid Layout</b>
         </h3>
-        <h3 style={{ color: theme.palette.primary.contrastText }}>
+        <h3 className={classes.technologies}>
           <i>
             {responsiveText(
               'React.js | CSS Grid | AWS S3',
@@ -232,7 +243,8 @@ export default function FrontendWorks() {
             components
           </b>
         </h3>
-        <h3 style={{ color: theme.palette.primary.contrastText }}>
+
+        <h3 className={classes.technologies}>
           <i>
             {responsiveText(
               'Next.js | Material-UI | Node.js | Netlify',
@@ -299,7 +311,8 @@ export default function FrontendWorks() {
             from figma
           </b>
         </h3>
-        <h3 style={{ color: theme.palette.primary.contrastText }}>
+
+        <h3 className={classes.technologies}>
           <i>
             {responsiveText(
               'React.js | figma | sanity.io | Netlify',
@@ -345,7 +358,8 @@ export default function FrontendWorks() {
             eye
           </b>
         </h3>
-        <h3 style={{ color: theme.palette.primary.contrastText }}>
+
+        <h3 className={classes.technologies}>
           <i>
             {responsiveText(
               'React.js | Material-ui | Netlify',
