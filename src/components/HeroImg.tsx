@@ -5,7 +5,7 @@ import { useTheme } from '@material-ui/core';
 import useWindowWidth from '../hooks/useWindowWidth';
 import { CSSStyle } from '../types/types';
 import ProgressiveImgWithFallback from './ProgressiveImgWithFallback';
-import { hoverable } from '../styles/Styles';
+import { easeInOut } from '../styles/Styles';
 
 const imgBase: CSSStyle = {
   position: 'relative',
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     borderRadius: '34px',
     mixBlendMode: 'luminosity',
     paddingTop: props.upSm ? 0 : '1vw',
-    ...hoverable,
+    ...easeInOut,
     '&:hover': {
       mixBlendMode: 'unset',
       transform: 'scale(1.04)',
