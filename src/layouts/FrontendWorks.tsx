@@ -6,10 +6,11 @@ import { hoverable, imgBase } from '../styles/Styles';
 import WorksCard from '../components/WorksCard';
 import useWindowSize from '../hooks/useWindowResize';
 import ParallaxBackground from '../components/ParallaxBackground';
+import useBreakPoint from '../hooks/useBreakPoint';
 
 type StyleProps = {
   upMd: boolean;
-  downXs: boolean;
+  downSm: boolean;
   windowWidth: number;
   theme: Theme;
 };
@@ -20,18 +21,19 @@ const useStyles = makeStyles({
     ...hoverable,
     width: upMd ? '70vw' : `${windowWidth * 0.85}px`,
   }),
-  technologies: ({ theme, downXs }: StyleProps) => ({
+  technologies: ({ theme, downSm }: StyleProps) => ({
     color: theme.palette.primary.contrastText,
-    textAlign: downXs ? 'center' : 'initial',
+    textAlign: downSm ? 'center' : 'initial',
   }),
 });
 
 export default function FrontendWorks() {
   const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
-  const upMd = windowWidth >= theme.breakpoints.values.md;
-  const downXs = windowWidth < theme.breakpoints.values.xs;
-  const classes = useStyles({ upMd, downXs, theme, windowWidth });
+  const upMd = useBreakPoint('up', 'md');
+  const downXs = useBreakPoint('down', 'xs');
+  const downSm = useBreakPoint('down', 'sm');
+  const classes = useStyles({ upMd, downSm, theme, windowWidth });
 
   function responsiveText(long: string, short: string): string {
     return windowWidth >= theme.breakpoints.values.sm ? long : short;
