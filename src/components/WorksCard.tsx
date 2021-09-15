@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactNode } from 'react';
 import Paper from '@material-ui/core/Paper';
-import { useTheme } from '@material-ui/core';
-import useWindowSize from '../hooks/useWindowResize';
 import WorksCardDescription from './WorksCardDescription';
 import WorksCardImg, { ImgSides } from './WorksCardImg';
+import WorksCardTitle from './WorksCardTitle';
+import useBreakPoint from '../hooks/useBreakPoint';
 
 type ImgProps = {
   src: string;
@@ -45,11 +45,29 @@ export default function WorksCard(props: Props & Record<string, any>) {
     featuredContent,
     zIndex,
   } = props;
-  //
-  const { width: windowWidth } = useWindowSize();
-  const theme = useTheme();
-  const upMd = windowWidth >= theme.breakpoints.values.md;
-  const downXs = windowWidth < theme.breakpoints.values.xs;
+  const upMd = useBreakPoint('up', 'md');
+  const downSm = useBreakPoint('down', 'sm');
+  const downXs = useBreakPoint('down', 'xs');
+
+  /**
+   * Returns 'column' on xs-devices,
+   * otherwise 'row' to show image on
+   * the left or 'row-reverse' to show
+   * image on the right.
+   */
+  function flexDirection() {
+    if (downSm) {
+      return 'column';
+    }
+    if (ImgSides[imgSide] === ImgSides.left) {
+      return 'row';
+    }
+    if (ImgSides[imgSide] === ImgSides.right) {
+      return 'row-reverse';
+    }
+    throw new Error('Invalide value provided for: imgSide.');
+  }
+
   return (
     <div
       style={{
@@ -66,8 +84,7 @@ export default function WorksCard(props: Props & Record<string, any>) {
         style={{
           display: 'flex',
           zIndex: zIndex || 0 + 1,
-          flexDirection:
-            ImgSides[imgSide] === ImgSides.left ? 'row' : 'row-reverse',
+          flexDirection: flexDirection(),
           width: upMd ? '80vw' : '100%',
           marginTop: `calc(48px + ${marginTop || '0px'})`,
           marginBottom: `calc(56px + ${marginBottom || '0px'})`,
@@ -78,6 +95,7 @@ export default function WorksCard(props: Props & Record<string, any>) {
           }),
         }}
       >
+        {downSm && <WorksCardTitle title={descriptionProps.title} />}
         <WorksCardImg imgSide={imgSide} {...imgProps} href={href} />
         <WorksCardDescription
           imgSide={imgSide}

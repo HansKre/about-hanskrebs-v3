@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import React, { useState, useEffect } from 'react';
 import ProgressiveImage from 'react-progressive-image';
+import useBreakPoint from '../hooks/useBreakPoint';
 import LoadingAnim from './loading-anim/LoadingAnim';
 import WebpWithFallback from './WebpWithFallback';
 
@@ -55,9 +56,30 @@ export default function ProgressiveImgWithFallback(props: Props) {
     })();
   }, [setSupportsWebp]);
 
+  const downSm = useBreakPoint('down', 'sm');
+  const downXs = useBreakPoint('down', 'xs');
+
+  const downSmStyle = {
+    flex: 'auto',
+    justifyContent: 'center',
+    margin: '5rem 0 6rem 0',
+  };
+
+  const downXsStyle = {
+    flex: 'auto',
+    justifyContent: 'center',
+    margin: '3rem 0 4rem 0',
+  };
+
   return (
     <div
-      style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        ...(downSm && downSmStyle),
+        ...(downXs && downXsStyle),
+      }}
     >
       {webpSupportDetected && (
         <ProgressiveImage

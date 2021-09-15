@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
-import { IconButton, useTheme } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import useWindowSize from '../hooks/useWindowResize';
 import { ImgSides } from './WorksCardImg';
+import useBreakPoint from '../hooks/useBreakPoint';
+import WorksCardTitle from './WorksCardTitle';
 
 type Props = {
   title: string;
@@ -21,8 +22,8 @@ const handleClick = (url: string) => {
 
 export default function WorksCardDescription(props: Props) {
   const { imgSide, title, href, github, children } = props;
-  const theme = useTheme();
-  const { width: windowWidth } = useWindowSize();
+  const downSm = useBreakPoint('down', 'sm');
+  const upSm = useBreakPoint('up', 'sm');
 
   function Buttons() {
     return (
@@ -51,9 +52,9 @@ export default function WorksCardDescription(props: Props) {
             : '0 7.5vw 0 4vw',
       }}
     >
-      <h2 style={{ color: theme.palette.primary.main }}>{title}</h2>
+      {!downSm && <WorksCardTitle title={title} />}
       {children}
-      {windowWidth >= theme.breakpoints.values.sm && <Buttons />}
+      {upSm && <Buttons />}
     </div>
   );
 }
