@@ -332,7 +332,7 @@ export default function FrontendWorks() {
           github: 'https://github.com/HansKre/fem-stats-preview-component',
         }}
         marginTop='7.5vw'
-        marginBottom='7.5vw'
+        marginBottom={downSm ? '0vw' : '7.5vw'}
         imgSide='right'
         backgroundColor='white'
         href='https://dazzling-roentgen-c2c3a7.netlify.app/'

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import WorksCardDescription from './WorksCardDescription';
 import WorksCardImg, { ImgSides } from './WorksCardImg';
@@ -31,6 +32,57 @@ type Props = {
   featuredContent?: ReactNode;
 };
 
+/**
+ * Returns 'column' on xs-devices,
+ * otherwise 'row' to show image on
+ * the left or 'row-reverse' to show
+ * image on the right.
+ */
+function flexDirection(downSm: boolean, imgSide: keyof typeof ImgSides) {
+  if (downSm) {
+    return 'column';
+  }
+  if (ImgSides[imgSide] === ImgSides.left) {
+    return 'row';
+  }
+  if (ImgSides[imgSide] === ImgSides.right) {
+    return 'row-reverse';
+  }
+  throw new Error('Invalide value provided for: imgSide.');
+}
+
+const useStyles = makeStyles({
+  paper: ({
+    marginTop,
+    marginBottom,
+    zIndex,
+    imgSide,
+    upMd,
+    downSm,
+    downXs,
+  }: {
+    marginTop: string | undefined;
+    marginBottom: string | undefined;
+    zIndex: number | undefined;
+    imgSide: keyof typeof ImgSides;
+    upMd: boolean;
+    downSm: boolean;
+    downXs: boolean;
+  }) => ({
+    display: 'flex',
+    zIndex: zIndex || 0 + 1,
+    flexDirection: flexDirection(downSm, imgSide),
+    width: upMd ? '80vw' : '100%',
+    marginTop: `calc(48px + ${marginTop || '0px'})`,
+    marginBottom: `calc(56px + ${marginBottom || '0px'})`,
+    borderRadius: '20px',
+    ...(ImgSides[imgSide] === ImgSides.left && {
+      position: 'relative',
+      ...(!downXs && { right: '-25px' }),
+    }),
+  }),
+});
+
 export default function WorksCard(props: Props & Record<string, any>) {
   // eslint-disable-next-line object-curly-newline
   const {
@@ -45,28 +97,19 @@ export default function WorksCard(props: Props & Record<string, any>) {
     featuredContent,
     zIndex,
   } = props;
+
   const upMd = useBreakPoint('up', 'md');
   const downSm = useBreakPoint('down', 'sm');
   const downXs = useBreakPoint('down', 'xs');
-
-  /**
-   * Returns 'column' on xs-devices,
-   * otherwise 'row' to show image on
-   * the left or 'row-reverse' to show
-   * image on the right.
-   */
-  function flexDirection() {
-    if (downSm) {
-      return 'column';
-    }
-    if (ImgSides[imgSide] === ImgSides.left) {
-      return 'row';
-    }
-    if (ImgSides[imgSide] === ImgSides.right) {
-      return 'row-reverse';
-    }
-    throw new Error('Invalide value provided for: imgSide.');
-  }
+  const classes = useStyles({
+    marginTop,
+    marginBottom,
+    zIndex,
+    imgSide,
+    upMd,
+    downSm,
+    downXs,
+  });
 
   return (
     <div
@@ -79,22 +122,7 @@ export default function WorksCard(props: Props & Record<string, any>) {
         zIndex,
       }}
     >
-      <Paper
-        elevation={12}
-        style={{
-          display: 'flex',
-          zIndex: zIndex || 0 + 1,
-          flexDirection: flexDirection(),
-          width: upMd ? '80vw' : '100%',
-          marginTop: `calc(48px + ${marginTop || '0px'})`,
-          marginBottom: `calc(56px + ${marginBottom || '0px'})`,
-          borderRadius: '20px',
-          ...(ImgSides[imgSide] === ImgSides.left && {
-            position: 'relative',
-            ...(!downXs && { right: '-25px' }),
-          }),
-        }}
-      >
+      <Paper elevation={12} className={classes.paper}>
         {downSm && <WorksCardTitle title={descriptionProps.title} />}
         <WorksCardImg imgSide={imgSide} {...imgProps} href={href} />
         <WorksCardDescription
@@ -105,7 +133,7 @@ export default function WorksCard(props: Props & Record<string, any>) {
           {children}
         </WorksCardDescription>
       </Paper>
-      {featuredContent}
+      {!downSm && featuredContent}
     </div>
   );
 }
