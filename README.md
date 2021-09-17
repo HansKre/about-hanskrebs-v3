@@ -7,16 +7,16 @@
 ```bash
 # create lowres images
 mkdir lowres
-sips -Z 640 *.jpg -o ./lowres/
-sips -Z 640 *.jpeg -o ./lowres/
-sips -Z 640 *.png -o ./lowres/
-sips -Z 640 *.gif -o ./lowres/
+sips -Z 640 -.jpg -o ./lowres/
+sips -Z 640 -.jpeg -o ./lowres/
+sips -Z 640 -.png -o ./lowres/
+sips -Z 640 -.gif -o ./lowres/
 # add _lowres as suffix
 cd lowres
-for filename in *; do mv -v "${filename}" "${filename%.*}_lowres.${filename##*.}"; done;
+for filename in -; do mv -v "${filename}" "${filename%.-}_lowres.${filename##-.}"; done;
 # move
 cd ..
-mv ./lowres/* ./
+mv ./lowres/- ./
 # remove folder
 rm -r lowres
 ```
@@ -35,7 +35,7 @@ Instead, install `webp` manually:
 ```bash
 wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.1-mac-10.15.tar.gz  -O /tmp/libwebp-1.2.1-mac-10.15.tar.gz
 tar -C /tmp -zxvf /tmp/libwebp-1.2.1-mac-10.15.tar.gz
-sudo mv /tmp/libwebp-1.2.1-mac-10.15/bin/* /usr/local/bin/
+sudo mv /tmp/libwebp-1.2.1-mac-10.15/bin/- /usr/local/bin/
 rm /tmp/libwebp-1.2.1-mac-10.15.tar.gz
 rm -r /tmp/libwebp-1.2.1-mac-10.15
 ```
@@ -54,20 +54,20 @@ gif2webp animated.gif -o animated.webp
 
 ```bash
 # all png-files
-for filename in *.png; do cwebp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
+for filename in -.png; do cwebp -q 80 "${filename}" -o "${filename%.-}.webp"; done;
 # all jpg-files
-for filename in *.jpg; do cwebp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
+for filename in -.jpg; do cwebp -q 80 "${filename}" -o "${filename%.-}.webp"; done;
 # all png-files with _lowres suffix
-for filename in *_lowres.png; do cwebp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
+for filename in -_lowres.png; do cwebp -q 80 "${filename}" -o "${filename%.-}.webp"; done;
 ```
 
 #### Batch-mode for gif
 
 ```bash
 # all gif-files
-for filename in *.gif; do gif2webp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
+for filename in -.gif; do gif2webp -q 80 "${filename}" -o "${filename%.-}.webp"; done;
 # all gif-files with _lowres suffix
-for filename in *_lowres.gif; do gif2webp -q 80 "${filename}" -o "${filename%.*}.webp"; done;
+for filename in -_lowres.gif; do gif2webp -q 80 "${filename}" -o "${filename%.-}.webp"; done;
 ```
 
 ### Safari-Fallback
@@ -123,7 +123,7 @@ From now on, the `picture` element does the heavy lifting for us: if it sees a b
 
 - [Safari Image Size Auto Height CSS](https://stackoverflow.com/questions/10760243/safari-image-size-auto-height-css)
 
-For those who **needs to use height auto** and **parent of image is set to `display: flex`**, this trick will help.
+For those who --needs to use height auto-- and --parent of image is set to `display: flex`--, this trick will help.
 
 `image { align-self: flex-start; }`
 
@@ -133,8 +133,8 @@ If your parent of image has set flex-direction: column, you need to do this inst
 
 ## Setup Airbnb Style Guide
 
-- Install VSCode Extensions: **Lint**
-- Install VSCode Extensions: **Prettier**
+- Install VSCode Extensions: --Lint--
+- Install VSCode Extensions: --Prettier--
 - Install packages: `npm i -D eslint prettier eslint-plugin-prettier eslint-config-prettier`
 - [Option] Install plugin and rules for `node`: `npm i -D eslint-plugin-node eslint-config-node`
 - Install `javascript`-version of Airbnb Style Guide: `npx install-peerdeps --dev eslint-config-airbnb`
@@ -171,7 +171,7 @@ If your parent of image has set flex-direction: column, you need to do this inst
 
 - Setup project-local Linting-Rules: `npx eslint --init`
 - Choose `json` for format of config-file
-- In the end, choose **'Airbnb'**-Option, when asked **'Which style guide do you want to follow?'**
+- In the end, choose --'Airbnb'---Option, when asked --'Which style guide do you want to follow?'--
 - Changes to `.eslintrc.json`:
   - In the `extends` property add: `"extends": ["plugin:react/recommended", "airbnb", "plugin:import/react"],`
   - In the `settings` property add:
@@ -202,7 +202,7 @@ If your parent of image has set flex-direction: column, you need to do this inst
   ```
 
 - [Optional]: Setup project-local Prettier Rules: Create `.prettierrc`-file in your project-root and add rules in there.
-- [Optional]: Ignoring locally: Create `.prettierignore` in project-root and use `.gitignore`-synthax, i.e. `*.md` to ignore all `markdown` files. Example `.prettierignore`-file:
+- [Optional]: Ignoring locally: Create `.prettierignore` in project-root and use `.gitignore`-synthax, i.e. `-.md` to ignore all `markdown` files. Example `.prettierignore`-file:
 
 ```.prettierignore
 # Ignore artifacts:
@@ -210,22 +210,22 @@ build
 coverage
 
 # Ignore all Markdown files:
-*.md
+-.md
 ```
 
 - [Optional] Create local `.eslintignore` file, example:
 
 ```eslintignore
-!**/.eslintrc*
-node_modules*
+!--/.eslintrc-
+node_modules-
 dist
-*.svg
-*.ico
-*.json
+-.svg
+-.ico
+-.json
 .gitignore
-*.md
-*.log
-*.lock
+-.md
+-.log
+-.lock
 ```
 
 - Add following settings to `settings.json`:
@@ -292,3 +292,34 @@ react/jsx-fragments                |     6.872 |     0.1%
 - `git stash apply` applies changes and keeps them in the stash-stack (useful to apply same changes on multiple branches)
 
 [Source](https://www.atlassian.com/git/tutorials/saving-changes/git-stash)
+
+## Backlog
+
+- parallax background for other work cards
+- (?) landing page: on iPhone -> remote friendliness after page loaded -> jumps to beginning of page??
+- landing page: blinking countdown animation before curtain opens
+- About me: fade in left, then right with delay, both from below
+- Photography -> horizontal scroll
+  - [full-page example](https://s2d46.csb.app/)
+  - [codesandbox](https://codesandbox.io/s/s2d46)
+- HANS KREBS: [flipping letters](https://codesandbox.io/s/sim2r)
+- better way of using jss, makeStyles, props, typescript
+  - very verbose to have to pass props to makestyles because they need to be typed
+  - own CSS file is not ideal because variables and JavaScript cannot be used at all; this is even less ideal than verbose code as described above
+  - `next.js` is bundles [`styled-jsx`](https://github.com/vercel/next.js/tree/canary/examples/with-styled-jsx), which also supports `server-side-rendering`. That should be an option to look into further.
+  - uninstall material-ui
+- Refactor:
+  - Nomenklatur: Button.component.tsx
+  - Wrappen:
+    - <MyHeader>Foo</MyHeader>
+    - <LayoutContainer>….</LayoutContainer>
+- animations
+  - scroll-to-position // spring transformation
+  - [parallax-inspirations](https://www.awwwards.com/inspiration/search?text=parallax&type=element)
+  - implement for my landing-page [amazing entrance-animation from youtube](https://www.youtube.com/watch?v=3QrkCmsfewM)
+- feature: color-palette selector component
+- reverse engineer [secondary](https://www.wix.com/logo/maker/esh/zoe-editor?industry={"industry":"3d95f5101a3e882ac54beba2_a28c5e5ea1945e5fa4ca1728_portfolio","isCustom":false}&tags=creative,modern&selectedWebsiteId=3&logoId=c8caec57-43ad-442a-8851-771896c38b0e&logoPurpose=website&referralAdditionalInfo=arenaSplitPage) color pallette
+- contact: fill space between social icons with dots
+  - [stackoverflow](https://stackoverflow.com/questions/5476673/css-justify-text-fill-space-with-dots)
+  - [codepen](https://codepen.io/Kseso/pen/fxrsL)
+  - [SVG Line Between Divs](https://codepen.io/berky93/pen/vKmkWG)
