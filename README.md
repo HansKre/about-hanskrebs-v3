@@ -93,8 +93,8 @@ We can use following fallback as a solution:
 
 ```jsx
 <picture>
-    <source srcSet='image.webp' type='image/webp' />
-    <img src='fallback.jpg' />
+  <source srcSet='image.webp' type='image/webp' />
+  <img src='fallback.jpg' />
 </picture>
 ```
 
@@ -140,8 +140,9 @@ If your parent of image has set flex-direction: column, you need to do this inst
 - Install `javascript`-version of Airbnb Style Guide: `npx install-peerdeps --dev eslint-config-airbnb`
   - if this throws a dependency-error, install latest versions of deps manually: `npm i -D eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks`
 - [Optional] Install `typescript`-version of Airbnb Style Guide: [eslint-config-airbnb-typescript](https://www.npmjs.com/package/eslint-config-airbnb-typescript)
+
   - Install dependencies:
-  
+
   ```bash
   npm install eslint-config-airbnb-typescript \
             @typescript-eslint/eslint-plugin@^4.29.3 \
@@ -173,6 +174,7 @@ If your parent of image has set flex-direction: column, you need to do this inst
 - Choose `json` for format of config-file
 - In the end, choose --'Airbnb'---Option, when asked --'Which style guide do you want to follow?'--
 - Changes to `.eslintrc.json`:
+
   - In the `extends` property add: `"extends": ["plugin:react/recommended", "airbnb", "plugin:import/react"],`
   - In the `settings` property add:
 
@@ -277,8 +279,8 @@ react/jsx-fragments                |     6.872 |     0.1%
 
 ### Improving performance
 
-1) deactivate rules (at least during development to improve lint-on-typing experience)
-2) Use `--cache` option
+1. deactivate rules (at least during development to improve lint-on-typing experience)
+2. Use `--cache` option
 
 ## Git stash
 
@@ -303,16 +305,11 @@ react/jsx-fragments                |     6.872 |     0.1%
   - [full-page example](https://s2d46.csb.app/)
   - [codesandbox](https://codesandbox.io/s/s2d46)
 - HANS KREBS: [flipping letters](https://codesandbox.io/s/sim2r)
-- better way of using jss, makeStyles, props, typescript
-  - very verbose to have to pass props to makestyles because they need to be typed
-  - own CSS file is not ideal because variables and JavaScript cannot be used at all; this is even less ideal than verbose code as described above
-  - `next.js` is bundles [`styled-jsx`](https://github.com/vercel/next.js/tree/canary/examples/with-styled-jsx), which also supports `server-side-rendering`. That should be an option to look into further.
-  - uninstall material-ui
 - Refactor:
   - Nomenklatur: Button.component.tsx
   - Wrappen:
-    - <MyHeader>Foo</MyHeader>
-    - <LayoutContainer>….</LayoutContainer>
+    - `<MyHeader>Foo</MyHeader>`
+    - `<LayoutContainer>….</LayoutContainer>`
 - animations
   - scroll-to-position // spring transformation
   - [parallax-inspirations](https://www.awwwards.com/inspiration/search?text=parallax&type=element)
@@ -323,3 +320,28 @@ react/jsx-fragments                |     6.872 |     0.1%
   - [stackoverflow](https://stackoverflow.com/questions/5476673/css-justify-text-fill-space-with-dots)
   - [codepen](https://codepen.io/Kseso/pen/fxrsL)
   - [SVG Line Between Divs](https://codepen.io/berky93/pen/vKmkWG)
+
+### Alternative to `jss`
+
+- using jss, makeStyles, props, typescript is very verbose to have to pass props to makestyles because they need to be typed
+- own CSS file is not ideal because variables and JavaScript cannot be used at all; this is even less ideal than verbose code as described above
+- `next.js` is bundles [`styled-jsx`](https://github.com/vercel/next.js/tree/canary/examples/with-styled-jsx), which also supports `server-side-rendering`. That should be an option to look into further.
+  - con: can't use js-variables in styles!
+- `react inline styles`
+  - con: can't use `:hover`
+
+### Digest of Alternatives
+
+- `jss` vs. `styled-components` - paradigms:
+  - `jss` is more like the traditional CSS-approach of styling by adding & removing classes. You can create fine-grained CSS-classes and merge a list of class-names.
+  - `styled-components` is about creating purpose based, ready styled components
+  - Usually, even in `jss`, you do not add or remove class-names when using react, but rather, styling happens with one single CSS-class controled by props.
+- [styled-components](https://github.com/styled-components/styled-components)
+- [linaria](https://github.com/callstack/linaria)
+  - [linaria with next.js](https://github.com/vercel/next.js/tree/canary/examples/with-linaria)
+- [styletron](https://github.com/styletron/styletron)
+- according to [State of CSS Report 2020](https://2020.stateofcss.com/en-US/report/):
+  - more than 44% haven't heard of `jss` and >13% would not use it again (compared to `styled-components`: >11%, >16%)
+  - >18% used it and >26% would like to learn it (compared to `styled-components`: >49%, >24%)
+  - Developer-Experience seems to strongly tend into direction of `styled-components`
+  - ![css-in-jss-experience](https://stateofx-images.netlify.app/captures/css2020/en-US/css_in_js_experience_marimekko.png)
