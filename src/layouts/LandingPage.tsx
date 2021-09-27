@@ -7,6 +7,7 @@ import Burger from '../components/Burger';
 import Logo from '../components/Logo.Component';
 import useBreakPoint from '../hooks/useBreakPoint';
 import * as AnimationVariants from '../styles/AnimationVariants';
+import FadeInOnMount from '../animations/FadeInOnMount';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -65,18 +66,10 @@ export default function LandingPage() {
     }
   );
 
-  const opacity = useTransform(scrollY, [0, window.innerHeight], [1, 0.6], {
-    clamp: true,
-  });
-
   scalingMotion.onChange(() => setScale(scalingMotion.get()));
 
   return (
-    <motion.div
-      style={{
-        opacity,
-      }}
-    >
+    <FadeInOnMount>
       <Grid
         container
         style={{
@@ -196,6 +189,6 @@ export default function LandingPage() {
           </motion.div>
         </Grid>
       </Grid>
-    </motion.div>
+    </FadeInOnMount>
   );
 }
