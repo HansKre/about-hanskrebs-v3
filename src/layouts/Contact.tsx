@@ -1,60 +1,12 @@
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/core';
-import { SocialIcon } from 'react-social-icons';
-import { hoverable } from '../styles/Styles';
-import useWindowSize from '../hooks/useWindowResize';
 import MailToButton from './contact/MailToButton';
-
-const useStyles = makeStyles({
-  hoverableSocial: {
-    ...hoverable,
-    '&:hover': {
-      transform: 'scale(1.15)',
-    },
-  },
-});
+import useBreakPoint from '../hooks/useBreakPoint';
+import SocialIcons from './contact/SocialIcons';
 
 export default function Contact() {
   const theme = useTheme();
-  const { width: windowWidth } = useWindowSize();
-  const upMd = windowWidth >= theme.breakpoints.values.md;
-  const classes = useStyles({ upMd });
-
-  function SocialIcons() {
-    return (
-      <div style={{ display: 'flex', flex: 1 }}>
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <SocialIcon
-            bgColor={theme.palette.secondary.light}
-            className={`${classes.hoverableSocial}`}
-            url='https://github.com/hanskre'
-            target='_blank'
-            rel='noopener noreferrer'
-          />
-          <SocialIcon
-            className={`${classes.hoverableSocial}`}
-            url='https://www.linkedin.com/in/hans-krebs-63b35034/'
-            target='_blank'
-            rel='noopener noreferrer'
-          />
-          <SocialIcon
-            className={`${classes.hoverableSocial}`}
-            url='https://www.instagram.com/hanso711/'
-            target='_blank'
-            rel='noopener noreferrer'
-          />
-        </div>
-      </div>
-    );
-  }
+  const upMd = useBreakPoint('up', 'md');
 
   return (
     <section
@@ -77,15 +29,7 @@ export default function Contact() {
           </h3>
           <MailToButton />
         </Grid>
-        <Grid
-          item
-          container
-          direction='column'
-          xs={12}
-          style={{ marginTop: '2em' }}
-        >
-          <SocialIcons />
-        </Grid>
+        <SocialIcons />
       </Grid>
     </section>
   );
