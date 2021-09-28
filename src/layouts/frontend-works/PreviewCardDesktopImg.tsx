@@ -1,4 +1,3 @@
-/* eslint-disable no-confusing-arrow */
 /* eslint-disable global-require */
 import styled from 'styled-components';
 import useWindowSize from '../../hooks/useWindowResize';
