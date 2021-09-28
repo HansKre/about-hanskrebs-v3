@@ -58,6 +58,7 @@
     // off due to performance issues with this rule
     // TODO: create separate configuration for production by extending
     // https://eslint.org/docs/2.0.0/user-guide/configuring
-    "@typescript-eslint/no-implied-eval": "off"
+    "@typescript-eslint/no-implied-eval": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }
