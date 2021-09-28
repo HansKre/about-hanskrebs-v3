@@ -9,6 +9,7 @@ import useBreakPoint from '../hooks/useBreakPoint';
 import * as AnimationVariants from '../styles/AnimationVariants';
 import FadeInOnMount from '../animations/FadeInOnMount';
 import CurtainsUp from '../animations/CurtainsUp';
+import GridContainer from '../styled-components/GridContainer';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -58,12 +59,7 @@ export default function LandingPage() {
 
   return (
     <FadeInOnMount>
-      <Grid
-        container
-        style={{
-          overflow: 'hidden',
-        }}
-      >
+      <GridContainer container overFlowHidden>
         <CurtainsUp />
         <Grid
           item
@@ -171,7 +167,7 @@ export default function LandingPage() {
             </motion.div>
           </motion.div>
         </Grid>
-      </Grid>
+      </GridContainer>
     </FadeInOnMount>
   );
 }
