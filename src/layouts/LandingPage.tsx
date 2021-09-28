@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
 import Burger from '../components/Burger';
-import Logo from '../components/Logo.Component';
+import LogoContainer from './landing-page/LogoContainer';
 import useBreakPoint from '../hooks/useBreakPoint';
 import * as AnimationVariants from '../styles/AnimationVariants';
 import FadeInOnMount from '../animations/FadeInOnMount';
@@ -15,11 +15,6 @@ const useStyles = makeStyles({
   fullVh: {
     height: '100vh',
     maxHeight: '100vh',
-    overflow: 'hidden' /* hide overflow of padding-bottom for large content */,
-  },
-  topHalf: {
-    height: '40vh',
-    maxHeight: '40vh',
     overflow: 'hidden' /* hide overflow of padding-bottom for large content */,
   },
   bottomHalf: {
@@ -49,20 +44,8 @@ export default function LandingPage() {
     <FadeInOnMount>
       <GridContainer container overFlowHidden>
         <CurtainsUp />
-        <Grid
-          item
-          container
-          justifyContent='center'
-          alignItems='center'
-          xs={12}
-          sm={6}
-          className={upSm ? classes.fullVh : classes.topHalf}
-          style={{
-            transform: `scale(${scale})`,
-          }}
-        >
-          <Logo />
-        </Grid>
+        <LogoContainer scale={scale} />
+        {/* TODO: extract as <Welcome/> */}
         <Grid
           item
           container
