@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 
+/**
+ * Replacement of Material-UI Grid
+ */
 const GridContainer = styled.div<{
   container?: boolean;
   item?: boolean;
