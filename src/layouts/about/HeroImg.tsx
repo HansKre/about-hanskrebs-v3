@@ -2,10 +2,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core';
 
-import useWindowWidth from '../hooks/useWindowWidth';
-import { CSSStyle } from '../types/types';
-import ProgressiveImgWithFallback from './ProgressiveImgWithFallback';
-import { easeInOut } from '../styles/Styles';
+import useWindowWidth from '../../hooks/useWindowWidth';
+import { CSSStyle } from '../../types/types';
+import ProgressiveImgWithFallback from '../../components/ProgressiveImgWithFallback';
+import { easeInOut } from '../../styles/Styles';
 
 const imgBase: CSSStyle = {
   position: 'relative',
@@ -37,10 +37,10 @@ export default function HeroImg() {
   const animShiftDesktop = { top: '40%', left: '45%' };
   return (
     <ProgressiveImgWithFallback
-      src={require('../assets/IMG_1515.webp').default}
-      srcFallback={require('../assets/IMG_1515.jpg').default}
-      placeholder={require('../assets/IMG_1515_lowres.webp').default}
-      placeholderFallback={require('../assets/IMG_1515_lowres.jpg').default}
+      src={require('../../assets/IMG_1515.webp').default}
+      srcFallback={require('../../assets/IMG_1515.jpg').default}
+      placeholder={require('../../assets/IMG_1515_lowres.webp').default}
+      placeholderFallback={require('../../assets/IMG_1515_lowres.jpg').default}
       className={classes.img}
       animShift={animShiftDesktop}
     />
