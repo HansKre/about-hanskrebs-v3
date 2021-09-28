@@ -1,26 +1,19 @@
 /* eslint-disable global-require */
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme, Theme } from '@material-ui/core';
-import ProgressiveImgWithFallback from '../components/ProgressiveImgWithFallback';
-import { hoverable, imgBase } from '../styles/Styles';
 import WorksCard from '../components/WorksCard';
 import useWindowSize from '../hooks/useWindowResize';
 import ParallaxBackground from '../components/ParallaxBackground';
 import useBreakPoint from '../hooks/useBreakPoint';
+import Heading from './frontend-works/Heading';
+import PreviewCardDesktopImg from './frontend-works/PreviewCardDesktopImg';
 
 type StyleProps = {
-  upMd: boolean;
   downSm: boolean;
-  windowWidth: number;
   theme: Theme;
 };
 
 const useStyles = makeStyles({
-  imgDesktop: ({ upMd, windowWidth }: StyleProps) => ({
-    ...imgBase,
-    ...hoverable,
-    width: upMd ? '70vw' : `${windowWidth * 0.85}px`,
-  }),
   technologies: ({ theme, downSm }: StyleProps) => ({
     color: theme.palette.primary.contrastText,
     textAlign: downSm ? 'center' : 'initial',
@@ -28,80 +21,13 @@ const useStyles = makeStyles({
 });
 
 export default function FrontendWorks() {
-  const { width: windowWidth } = useWindowSize();
   const theme = useTheme();
-  const upMd = useBreakPoint('up', 'md');
-  const downXs = useBreakPoint('down', 'xs');
+  const { width: windowWidth } = useWindowSize();
   const downSm = useBreakPoint('down', 'sm');
-  const classes = useStyles({ upMd, downSm, theme, windowWidth });
+  const classes = useStyles({ downSm, theme });
 
   function responsiveText(long: string, short: string): string {
     return windowWidth >= theme.breakpoints.values.sm ? long : short;
-  }
-
-  function Heading() {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          padding: downXs ? '0 7.5vw 0vw 7.5vw' : '0 7.5vw 0vw 7.5vw',
-          justifyContent: 'center',
-        }}
-      >
-        <h1
-          style={{
-            color: theme.palette.primary.main,
-            margin: 0,
-            width: upMd ? '80vw' : '100%',
-          }}
-        >
-          Some Things I’ve Built 🔮
-        </h1>
-      </div>
-    );
-  }
-
-  function PreviewCardDesktopImg() {
-    const animShiftLandscape = { top: '35%', left: '42%' };
-    return (
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'center',
-          marginTop: '1vw',
-          marginBottom: '70px',
-        }}
-      >
-        <a
-          style={{ marginBottom: '-5px' }}
-          href='https://dazzling-roentgen-c2c3a7.netlify.app/'
-          target='_blank'
-          rel='noreferrer'
-        >
-          <ProgressiveImgWithFallback
-            src={
-              require('../assets/works/fem-stats-preview-card-desktop.webp')
-                .default
-            }
-            srcFallback={
-              require('../assets/works/fem-stats-preview-card-desktop.png')
-                .default
-            }
-            placeholder={
-              require('../assets/works/fem-stats-preview-card-desktop_lowres.webp')
-                .default
-            }
-            placeholderFallback={
-              require('../assets/works/fem-stats-preview-card-desktop_lowres.png')
-                .default
-            }
-            className={classes.imgDesktop}
-            animShift={animShiftLandscape}
-          />
-        </a>
-      </div>
-    );
   }
 
   return (
