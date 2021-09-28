@@ -1,25 +1,10 @@
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable global-require */
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import useWindowSize from '../../hooks/useWindowResize';
 import useBreakPoint from '../../hooks/useBreakPoint';
 import ProgressiveImgWithFallback from '../../components/ProgressiveImgWithFallback';
-
-const imgBase = css`
-  border-radius: 10px;
-  position: relative;
-`;
-
-const easeInOut = css`
-  transition: all 0.2s ease-in-out;
-`;
-
-const hoverable = css`
-  ${easeInOut}
-  &:hover {
-    transform: scale(1.04);
-  }
-`;
+import { hoverable, imgBase } from '../../styles/StyledComponentsStyles';
 
 const StyledProgressiveImgWithFallback = styled(ProgressiveImgWithFallback)<{
   upMd: boolean;
