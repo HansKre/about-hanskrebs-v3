@@ -8,6 +8,7 @@ import Logo from '../components/Logo.Component';
 import useBreakPoint from '../hooks/useBreakPoint';
 import * as AnimationVariants from '../styles/AnimationVariants';
 import FadeInOnMount from '../animations/FadeInOnMount';
+import CurtainsUp from '../animations/CurtainsUp';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -24,19 +25,6 @@ const useStyles = makeStyles({
     height: '60vh',
     maxHeight: '60vh',
     overflow: 'hidden' /* hide overflow of padding-bottom for large content */,
-  },
-  background: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: '100%',
-    width: '100%',
-    transformOrigin: 'top',
-    pointerEvents: 'none',
-    backgroundColor: 'black',
-    zIndex: 2,
   },
 });
 
@@ -76,12 +64,7 @@ export default function LandingPage() {
           overflow: 'hidden',
         }}
       >
-        <motion.div
-          variants={AnimationVariants.curtainsUp}
-          initial='expanded'
-          animate='shrunk'
-          className={classes.background}
-        />
+        <CurtainsUp />
         <Grid
           item
           container
