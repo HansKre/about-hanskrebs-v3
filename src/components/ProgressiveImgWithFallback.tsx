@@ -34,6 +34,7 @@ type Props = {
     top: string;
     left: string;
   };
+  scaleInside?: boolean;
 };
 
 export default function ProgressiveImgWithFallback(props: Props) {
@@ -44,6 +45,7 @@ export default function ProgressiveImgWithFallback(props: Props) {
     animShift,
     srcFallback,
     placeholderFallback,
+    scaleInside,
   } = props;
   const [supportsWebp, setSupportsWebp] = useState(false);
   const [webpSupportDetected, setWebpSupportDetected] = useState(false);
@@ -79,6 +81,10 @@ export default function ProgressiveImgWithFallback(props: Props) {
         alignItems: 'center',
         ...(downSm && downSmStyle),
         ...(downXs && downXsStyle),
+        ...(scaleInside && {
+          overflow: 'hidden',
+          borderRadius: '14px',
+        }),
       }}
     >
       {webpSupportDetected && (

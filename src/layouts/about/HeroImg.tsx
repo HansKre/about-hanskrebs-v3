@@ -18,7 +18,6 @@ const useStyles = makeStyles({
     zIndex: 1,
     width: '100%',
     height: 'auto',
-    borderRadius: '34px',
     mixBlendMode: 'luminosity',
     paddingTop: props.upSm ? 0 : '1vw',
     ...easeInOut,
@@ -43,6 +42,7 @@ export default function HeroImg() {
       placeholderFallback={require('../../assets/IMG_1515_lowres.jpg').default}
       className={classes.img}
       animShift={animShiftDesktop}
+      scaleInside
     />
   );
 }
