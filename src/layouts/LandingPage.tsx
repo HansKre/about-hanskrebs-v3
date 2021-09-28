@@ -1,8 +1,7 @@
 /* eslint-disable object-curly-newline */
-import { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Burger from '../components/Burger';
 import Logo from '../components/Logo.Component';
 import useBreakPoint from '../hooks/useBreakPoint';
@@ -10,6 +9,7 @@ import * as AnimationVariants from '../styles/AnimationVariants';
 import FadeInOnMount from '../animations/FadeInOnMount';
 import CurtainsUp from '../animations/CurtainsUp';
 import GridContainer from '../styled-components/GridContainer';
+import useScale from '../hooks/useScale';
 
 const useStyles = makeStyles({
   fullVh: {
@@ -42,20 +42,8 @@ export default function LandingPage() {
   const downSm = useBreakPoint('down', 'sm');
   const upSm = useBreakPoint('up', 'sm');
   const upMd = useBreakPoint('up', 'md');
-  const [scale, setScale] = useState(1);
 
-  const { scrollY } = useViewportScroll();
-
-  const scalingMotion = useTransform(
-    scrollY,
-    [0, window.innerHeight],
-    [1, 1.5],
-    {
-      clamp: true,
-    }
-  );
-
-  scalingMotion.onChange(() => setScale(scalingMotion.get()));
+  const scale = useScale({ scaleTo: 1.5, clamp: true });
 
   return (
     <FadeInOnMount>
