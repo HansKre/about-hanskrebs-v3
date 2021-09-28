@@ -1,15 +1,19 @@
 import { useTheme } from '@material-ui/core/styles';
 import useWindowWidth from '../hooks/useWindowWidth';
 import HeroImg from '../components/HeroImg';
+import useBreakPoint from '../hooks/useBreakPoint';
 
 export default function About() {
   const windowWidth = useWindowWidth();
   const theme = useTheme();
   const upSm = windowWidth >= theme.breakpoints.values.sm;
+  const downXl = useBreakPoint('down', 'xl');
 
   return (
-    <div
+    <section
+      id='about'
       style={{
+        ...(downXl && { minHeight: '100vh' }),
         columnCount: upSm ? 2 : 1,
         columnGap: '7.5vw',
         padding: upSm ? '7.5vw 7.5vw 7.5vw 7.5vw' : '10% 16px 7.5vw 32px',
@@ -18,7 +22,6 @@ export default function About() {
       }}
     >
       <h1
-        id='about'
         style={{
           marginTop: 0,
         }}
@@ -60,6 +63,6 @@ export default function About() {
         an amazing art.
       </h3>
       <HeroImg />
-    </div>
+    </section>
   );
 }

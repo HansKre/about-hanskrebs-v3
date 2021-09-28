@@ -9,12 +9,14 @@ export default function LandingPage() {
   const scale = useScale({ scaleTo: 1.5, clamp: true });
 
   return (
-    <FadeInOnMount>
-      <GridContainer container overFlowHidden>
-        <CurtainsUp />
-        <LogoContainer scale={scale} />
-        <GreetingContainer scale={scale} />
-      </GridContainer>
-    </FadeInOnMount>
+    <section id='landingpage'>
+      <FadeInOnMount>
+        <GridContainer container overFlowHidden>
+          <CurtainsUp />
+          <LogoContainer scale={scale} />
+          <GreetingContainer scale={scale} />
+        </GridContainer>
+      </FadeInOnMount>
+    </section>
   );
 }

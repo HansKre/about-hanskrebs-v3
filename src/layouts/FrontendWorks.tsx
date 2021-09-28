@@ -49,7 +49,6 @@ export default function FrontendWorks() {
         }}
       >
         <h1
-          id='works'
           style={{
             color: theme.palette.primary.main,
             margin: 0,
@@ -106,7 +105,8 @@ export default function FrontendWorks() {
   }
 
   return (
-    <div
+    <section
+      id='works'
       style={{
         display: 'flex',
         padding: '7.5vw 0',
@@ -370,6 +370,6 @@ export default function FrontendWorks() {
           </i>
         </h3>
       </WorksCard>
-    </div>
+    </section>
   );
 }

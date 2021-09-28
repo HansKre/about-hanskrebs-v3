@@ -68,7 +68,8 @@ export default function Contact() {
   }
 
   return (
-    <div
+    <section
+      id='contact'
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -78,7 +79,7 @@ export default function Contact() {
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <h1 id='contact'>Let’s Build Something Together 🤝</h1>
+      <h1>Let’s Build Something Together 🤝</h1>
       <Grid container>
         <Grid item container direction='column' xs={12}>
           <h3 style={{ paddingTop: 0 }}>
@@ -112,6 +113,6 @@ export default function Contact() {
           <SocialIcons />
         </Grid>
       </Grid>
-    </div>
+    </section>
   );
 }
