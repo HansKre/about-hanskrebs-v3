@@ -1,179 +1,244 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import { useState, useLayoutEffect, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { hoverable } from '../styles/Styles';
+import { motion, useMotionValue } from 'framer-motion';
+import { RefObject, useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { useInView } from 'react-intersection-observer';
+import { useTheme } from '@material-ui/core';
+import { bordersVariant } from './photography/variants';
+import { GALLERY } from './photography/gallery';
+import { hoverable, imgBase } from '../styles/StyledComponentsStyles';
+import useBreakPoint from '../hooks/useBreakPoint';
 
-const thumbnailRows = [
-  'DSC09761_p_thumbnail.jpg',
-  'DSC00470_l_thumbnail.jpg',
-  'DSC07683_p_thumbnail.jpg',
-  'DSC09894_l_thumbnail.jpg',
-  'DSC08898_l_thumbnail.jpg',
-  'DSC01822_l_thumbnail.jpg',
-  'DSC04253_l_thumbnail.jpg',
-  'IMG_1404_l_thumbnail.jpg',
-];
+const iPhoneX = '375px';
 
-function assetThumbnailLink(assetName: string) {
-  Boolean();
-  return require(`../assets/photography/${assetName}`).default;
-}
+/* We are scrolling virtually in the outer container.
+Due to `position: sticky; top: 0;` of the InnerContainer,
+it looks like InnerContainer is pinned during scrolling.
+*/
+const OuterContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
 
-function assetLink(assetName: string) {
-  return require(`../assets/photography/${assetName.replace('_thumbnail', '')}`)
-    .default;
-}
+const InnerContainer = styled(motion.div)`
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+`;
 
-type StyleProps = {
-  flexRowWidth: number;
-};
+const Section = styled.section<{ upMd: boolean; bgColor: string }>`
+  padding-bottom: ${({ upMd }) => (upMd ? '15vw' : 0)};
+  background-color: ${({ bgColor }) => bgColor};
+`;
 
-const useStyles = makeStyles({
-  img: {
-    borderRadius: '10px',
-    ...hoverable,
-  },
-  landscapeImg: (props: StyleProps) => ({
-    width: `${props.flexRowWidth / 2}px`,
-    marginBottom: '30px',
-  }),
-  portraitImg: (props: StyleProps) => ({
-    height: `${props.flexRowWidth / 2 / 1.5}px`,
-    marginBottom: '30px',
-  }),
-  stackedLandscapeImg: (props: StyleProps) => ({
-    height: `${props.flexRowWidth / 2 / 1.5 / 2 - 20}px`,
-  }),
-  stackedRow: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 0,
-    justifyContent: 'space-between',
-    '& :nth-of-type(2)': {
-      marginBottom: '30px',
-    },
-  },
-});
+const Gallery = styled(motion.ul)`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+  user-select: none;
+  padding: 0px 7.5vw 0px 7.5vw;
+  list-style-type: none;
+  will-change: transform;
+  cursor: default;
+
+  @media only screen and (max-width: ${iPhoneX}) {
+    padding: 0px 15vw;
+  }
+`;
+
+const GalleryTitle = styled.h1`
+  font-style: italic;
+  font-size: 64px;
+  color: white;
+
+  @media only screen and (max-width: ${iPhoneX}) {
+    font-size: 54px;
+  }
+`;
+
+const GalleryImage = styled.div`
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  ${imgBase}
+  ${hoverable}
+`;
+
+const GalleryItem = styled.li`
+  height: 70%;
+  width: 35vw;
+  min-height: 500px;
+  max-height: 700px;
+  min-width: 370px;
+  max-width: 450px;
+
+  @media only screen and (max-width: ${iPhoneX}) {
+    height: 60%;
+    width: 75vw;
+    min-height: initial;
+    max-height: initial;
+    min-width: initial;
+    max-width: initial;
+  }
+
+  &:not(:last-of-type) {
+    margin-right: 3.5vw;
+
+    @media only screen and (max-width: ${iPhoneX}) {
+      margin-right: 6vw;
+    }
+  }
+
+  &:nth-child(even) {
+    transform: translateY(25px);
+
+    @media only screen and (max-width: ${iPhoneX}) {
+      transform: translateY(50px);
+    }
+
+    ${GalleryTitle} {
+      transform: translateX(10%) translateY(-120%);
+    }
+  }
+
+  &:nth-child(odd) {
+    transform: translateY(-50px);
+
+    @media only screen and (max-width: ${iPhoneX}) {
+      transform: translateY(-30px);
+    }
+
+    ${GalleryTitle} {
+      transform: translateX(10%) translateY(-120%);
+    }
+  }
+`;
+
+const Heading = styled(motion.div)`
+  padding: 7.5vw 7.5vw 0 7.5vw;
+`;
 
 export default function Photography() {
-  const flexRowRef = useRef<HTMLDivElement>(null);
-  const [flexRowWidth, setWidth] = useState(0);
-  const classes = useStyles({ flexRowWidth });
+  const theme = useTheme();
+  const upMd = useBreakPoint('up', 'md');
+  const [virtualHeight, setVirtualHeight] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLUListElement>(null);
 
-  useLayoutEffect(() => {
-    setWidth(flexRowRef.current?.offsetWidth || 0);
-  }, [flexRowRef]);
+  const [inViewRef, inView] = useInView({ threshold: 1 });
+
+  const yMotionValue = useMotionValue(0);
+
+  useEffect(() => {
+    // even though we see a horizontal scroll (width-direction),
+    // browser is actually tracking the scrollY movement continously,
+    // since we are scrolling on the y-axis.
+    // Henc, a virtual height needs to be set, which is the width
+    // of the gallery but without the viewport-width (does not
+    // need to be scrolled, since it's already fully in view) but
+    // with the viewport-height (the actual hight of the DOM-element)
+    const calcVirtualHeight = (galleryWidth: number) => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const newVirtualHeight = galleryWidth - vw + vh;
+      return newVirtualHeight;
+    };
+
+    const calcAndSetVirtualHeight = (ref: RefObject<HTMLUListElement>) => {
+      const galleryWidth = ref.current?.scrollWidth || 0;
+      const newVirtualHeight = calcVirtualHeight(galleryWidth);
+      setVirtualHeight(newVirtualHeight);
+    };
+
+    const trackScroll = (ref: RefObject<HTMLDivElement>) => {
+      const offsetTopToYMotionVal = () => {
+        if (ref && ref.current) {
+          const offsetTop = -ref.current.offsetTop;
+          yMotionValue.set(offsetTop);
+        }
+      };
+      window.addEventListener('scroll', offsetTopToYMotionVal);
+    };
+
+    const resizeHandler = () => {
+      calcAndSetVirtualHeight(galleryRef);
+    };
+
+    calcAndSetVirtualHeight(galleryRef);
+    window.addEventListener('resize', resizeHandler);
+    trackScroll(containerRef);
+  }, [yMotionValue]);
+
+  function assetThumbnailLink(assetName: string) {
+    return require(`../assets/photography/${assetName}`).default;
+  }
+
+  function assetLink(assetName: string) {
+    return require(`../assets/photography/${assetName.replace(
+      '_thumbnail',
+      ''
+    )}`).default;
+  }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        justifyContent: 'center',
-        padding: '7.5vw',
-      }}
-    >
-      <h1 id='photography' style={{ color: 'rgb(12, 18, 72)' }}>
-        Photography 📸
-      </h1>
-      <h3
-        style={{
-          color: 'rgb(12, 18, 72)',
-          paddingTop: 0,
-          paddingBottom: '40px',
-        }}
-      >
-        Some favorite pictures that I took
-      </h3>
-      <div
-        ref={flexRowRef}
-        id='flexRow1'
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          marginBottom: '40px',
-        }}
-      >
-        <a href={assetLink(thumbnailRows[0])} target='_blank' rel='noreferrer'>
-          <img
-            className={`${classes.img} ${classes.portraitImg}`}
-            src={assetThumbnailLink(thumbnailRows[0])}
-            alt={thumbnailRows[0]}
-          />
-        </a>
-        <a href={assetLink(thumbnailRows[1])} target='_blank' rel='noreferrer'>
-          <img
-            className={`${classes.img} ${classes.landscapeImg}`}
-            src={assetThumbnailLink(thumbnailRows[1])}
-            alt={thumbnailRows[1]}
-          />
-        </a>
-        <a href={assetLink(thumbnailRows[2])} target='_blank' rel='noreferrer'>
-          <img
-            className={`${classes.img} ${classes.portraitImg}`}
-            src={assetThumbnailLink(thumbnailRows[2])}
-            alt={thumbnailRows[2]}
-          />
-        </a>
-        <a href={assetLink(thumbnailRows[3])} target='_blank' rel='noreferrer'>
-          <img
-            className={`${classes.img} ${classes.landscapeImg}`}
-            src={assetThumbnailLink(thumbnailRows[3])}
-            alt={thumbnailRows[3]}
-          />
-        </a>
-        <div className={classes.stackedRow}>
-          <a
-            href={assetLink(thumbnailRows[4])}
-            target='_blank'
-            rel='noreferrer'
-          >
-            <img
-              className={`${classes.img} ${classes.stackedLandscapeImg}`}
-              src={assetThumbnailLink(thumbnailRows[4])}
-              alt={thumbnailRows[4]}
-            />
-          </a>
-          <a
-            href={assetLink(thumbnailRows[5])}
-            target='_blank'
-            rel='noreferrer'
-          >
-            <img
-              className={`${classes.img} ${classes.stackedLandscapeImg}`}
-              src={assetThumbnailLink(thumbnailRows[5])}
-              alt={thumbnailRows[5]}
-            />
-          </a>
-        </div>
-        <div className={classes.stackedRow}>
-          <a
-            href={assetLink(thumbnailRows[6])}
-            target='_blank'
-            rel='noreferrer'
-          >
-            <img
-              className={`${classes.img} ${classes.stackedLandscapeImg}`}
-              src={assetThumbnailLink(thumbnailRows[6])}
-              alt={thumbnailRows[6]}
-            />
-          </a>
-          <a
-            href={assetLink(thumbnailRows[7])}
-            target='_blank'
-            rel='noreferrer'
-          >
-            <img
-              className={`${classes.img} ${classes.stackedLandscapeImg}`}
-              src={assetThumbnailLink(thumbnailRows[7])}
-              alt={thumbnailRows[7]}
-            />
-          </a>
-        </div>
-      </div>
-    </div>
+    <Section id='photography' upMd={upMd} bgColor={theme.palette.primary.dark}>
+      <Heading>
+        <h1>Favorite Pictures 📸</h1>
+        <h3>
+          Front End Development is a very creative process. Same is true for
+          photography. It is an art which naturally complements eye for detail,
+          lines, composition, symmetry and proportions. For me, it’s about
+          capturing the moment, beauty and wonders of our amazing world while
+          being creative.
+        </h3>
+        <h3>
+          Photography and Front End Development both being a real craft both
+          require a lot of practice, dedication and passion. I find it
+          fascinating and infinitely rewarding to look back at own works and see
+          actual progress in skilled craftmanship.
+        </h3>
+        <h3>Here are some of my favorite pictures that I took.</h3>
+      </Heading>
+      <OuterContainer style={{ height: virtualHeight }}>
+        <InnerContainer
+          variants={bordersVariant}
+          initial='none'
+          animate={inView ? 'solid' : 'none'}
+          ref={containerRef}
+        >
+          <Gallery ref={galleryRef} style={{ x: yMotionValue }}>
+            {GALLERY.map((imgData) => (
+              <GalleryItem
+                key={imgData.id}
+                ref={imgData.id === 0 ? inViewRef : undefined}
+              >
+                <a
+                  href={assetLink(imgData.thumbnailSrc)}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  <GalleryImage
+                    style={{
+                      backgroundImage: `url(${assetThumbnailLink(
+                        imgData.thumbnailSrc
+                      )})`,
+                    }}
+                  />
+                </a>
+                <GalleryTitle>{imgData.title}</GalleryTitle>
+              </GalleryItem>
+            ))}
+          </Gallery>
+        </InnerContainer>
+      </OuterContainer>
+    </Section>
   );
 }

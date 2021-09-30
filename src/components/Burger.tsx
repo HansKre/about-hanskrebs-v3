@@ -76,9 +76,9 @@ export default function Burger() {
         <StyledMenuItem onClick={() => handleClose('works')}>
           WORKS
         </StyledMenuItem>
-        {/* <StyledMenuItem onClick={() => handleClose('photography')}>
+        <StyledMenuItem onClick={() => handleClose('photography')}>
           PHOTOGRAPHY
-        </StyledMenuItem> */}
+        </StyledMenuItem>
         <StyledMenuItem onClick={() => handleClose('contact')}>
           CONTACT
         </StyledMenuItem>

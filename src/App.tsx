@@ -4,6 +4,7 @@ import LandingPage from './layouts/LandingPage';
 import About from './layouts/About';
 import Contact from './layouts/Contact';
 import FrontendWorks from './layouts/FrontendWorks';
+import Photography from './layouts/Photography';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <LandingPage />
       <About />
       <FrontendWorks />
+      <Photography />
       <Contact />
     </ThemeProvider>
   );
