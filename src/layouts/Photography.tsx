@@ -60,7 +60,7 @@ const GalleryTitle = styled.h1`
   color: white;
 
   @media only screen and (max-width: ${iPhoneX}) {
-    font-size: 54px;
+    font-size: 34px;
   }
 `;
 
