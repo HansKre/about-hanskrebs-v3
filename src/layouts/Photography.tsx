@@ -28,6 +28,8 @@ const InnerContainer = styled(motion.div)`
   width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
+  border-style: solid;
+  border-width: 5px;
 `;
 
 const Section = styled.section<{ upMd: boolean; bgColor: string }>`

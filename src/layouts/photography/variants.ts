@@ -35,12 +35,12 @@ export const tracksVariant = {
 };
 
 export const bordersVariant = {
-  none: { borderStyle: 'none' },
+  none: {
+    borderColor: 'rgb(12, 18, 72)',
+  },
   solid: {
-    borderStyle: 'solid',
-    borderWidth: '5px',
+    borderColor: 'white',
     transition: {
-      // delay: 2,
       ease: 'easeInOut',
     },
   },
