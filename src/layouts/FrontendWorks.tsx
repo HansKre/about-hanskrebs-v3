@@ -7,6 +7,9 @@ import ParallaxBackground from '../components/ParallaxBackground';
 import useBreakPoint from '../hooks/useBreakPoint';
 import Heading from './frontend-works/Heading';
 import PreviewCardDesktopImg from './frontend-works/PreviewCardDesktopImg';
+import StarContainer1 from '../components/StarContainer1';
+import StarContainer2 from '../components/StarContainer2';
+import StarContainer3 from '../components/StarContainer3';
 
 type StyleProps = {
   downSm: boolean;
@@ -88,7 +91,7 @@ export default function FrontendWorks() {
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='left'
-        backgroundColor={theme.palette.primary.light}
+        background='linear-gradient(rgb(19, 24, 42) 0%, rgb(38, 56, 103) 100%)'
         href='https://calculator4711.s3.eu-central-1.amazonaws.com/index.html'
         imgProps={{
           src: require('../assets/works/calc.webp').default,
@@ -99,6 +102,9 @@ export default function FrontendWorks() {
         }}
         zIndex={1}
       >
+        <StarContainer1 id='starcontainer1-calculator' />
+        <StarContainer2 />
+        <StarContainer3 />
         <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
           My goal was to create an interactive UI to showcase React’s
           capabilities for passing data between child-ccomponents using props.
@@ -189,7 +195,7 @@ export default function FrontendWorks() {
         marginTop='7.5vw'
         marginBottom='7.5vw'
         imgSide='left'
-        backgroundColor={theme.palette.primary.light}
+        background='linear-gradient(rgb(19, 24, 42) 0%, rgb(38, 56, 103) 100%)'
         href='https://reverent-benz-f8a629.netlify.app/'
         imgProps={{
           src: require('../assets/works/dionysos.webp').default,
@@ -199,6 +205,9 @@ export default function FrontendWorks() {
             .default,
         }}
       >
+        <StarContainer1 id='starcontainer1-restaurant' />
+        <StarContainer2 />
+        <StarContainer3 />
         <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
           Responsive restaurant page with design inspiration from{' '}
           <a

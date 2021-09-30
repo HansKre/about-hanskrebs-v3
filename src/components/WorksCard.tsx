@@ -25,6 +25,7 @@ type Props = {
   zIndex?: number;
   imgSide: keyof typeof ImgSides;
   backgroundColor?: string;
+  background?: string;
   href: string;
   imgProps: ImgProps;
   descriptionProps: DescriptionProps;
@@ -90,6 +91,7 @@ export default function WorksCard(props: Props & Record<string, any>) {
     marginBottom,
     imgSide,
     backgroundColor,
+    background,
     href,
     imgProps,
     descriptionProps,
@@ -118,7 +120,8 @@ export default function WorksCard(props: Props & Record<string, any>) {
         flexWrap: 'wrap',
         padding: '0 7.5vw',
         justifyContent: 'center',
-        backgroundColor,
+        ...(backgroundColor && { backgroundColor }),
+        ...(background && { background }),
         zIndex,
       }}
     >
