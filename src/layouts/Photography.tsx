@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 import { motion, useMotionValue } from 'framer-motion';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import { useTheme } from '@material-ui/core';
@@ -131,9 +131,11 @@ export default function Photography() {
   const upMd = useBreakPoint('up', 'md');
   const [virtualHeight, setVirtualHeight] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLUListElement>(null);
+  // `| null` is needed to be able to assign ref.current manually
+  // https://stackoverflow.com/questions/58017215/what-typescript-type-do-i-use-with-useref-hook-when-setting-current-manually
+  const galleryRef = useRef<HTMLUListElement | null>(null);
 
-  const [inViewRef, inView] = useInView({ threshold: 1 });
+  const [inViewRef, inView] = useInView({ threshold: 0.2 });
 
   const yMotionValue = useMotionValue(0);
 
@@ -188,6 +190,19 @@ export default function Photography() {
     )}`).default;
   }
 
+  // Use `useCallback` so we don't recreate the function
+  // on each render - Could result in infinite loop
+  const setRefs = useCallback(
+    (node) => {
+      // Ref's from useRef needs to have the node assigned to `current`
+      galleryRef.current = node;
+      // Callback refs, like the one from `useInView`,
+      // is a function that takes the node as an argument
+      inViewRef(node);
+    },
+    [inViewRef]
+  );
+
   return (
     <Section id='photography' upMd={upMd} bgColor={theme.palette.primary.dark}>
       <Heading>
@@ -214,12 +229,9 @@ export default function Photography() {
           animate={inView ? 'solid' : 'none'}
           ref={containerRef}
         >
-          <Gallery ref={galleryRef} style={{ x: yMotionValue }}>
+          <Gallery ref={setRefs} style={{ x: yMotionValue }}>
             {GALLERY.map((imgData) => (
-              <GalleryItem
-                key={imgData.id}
-                ref={imgData.id === 0 ? inViewRef : undefined}
-              >
+              <GalleryItem key={imgData.id}>
                 <a
                   href={assetLink(imgData.thumbnailSrc)}
                   target='_blank'
