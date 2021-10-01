@@ -4,15 +4,16 @@ import StarContainerLg from './stars-background/StarContainerLg';
 
 interface Props {
   id?: string;
+  flowDown?: boolean;
 }
 
-export default function StarsBackground({ id }: Props) {
+export default function StarsBackground({ id, flowDown = false }: Props) {
   return (
     <>
-      <StarContainerSm id={id} duration={60} />
-      <StarContainerMd duration={45} />
-      <StarContainerLg duration={30} />
-      <StarContainerLg duration={10} />
+      <StarContainerSm id={id} duration={60} flowDown={flowDown} />
+      <StarContainerMd duration={45} flowDown={flowDown} />
+      <StarContainerLg duration={30} flowDown={flowDown} />
+      <StarContainerLg duration={10} flowDown={flowDown} />
     </>
   );
 }

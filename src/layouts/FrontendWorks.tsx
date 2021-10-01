@@ -145,7 +145,7 @@ export default function FrontendWorks() {
             require('../assets/works/carbon-emissions_lowres.gif').default,
         }}
       >
-        <StarsBackground id='stars-carbon' />
+        <StarsBackground id='stars-carbon' flowDown />
         <h3 style={{ color: theme.palette.primary.main, paddingTop: 0 }}>
           React-based frontend for{' '}
           <a

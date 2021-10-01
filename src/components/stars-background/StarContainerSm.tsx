@@ -1,15 +1,7 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
+import { flowDownAnim, flowUpAnim } from './starsKeyframes';
 
-const animate = keyframes`
-0% {
-    transform: translateY(0px);
-}
-100% {
-    transform: translateY(-1000px);
-}
-`;
-
-const StarContainerSm = styled.div<{ duration: number }>`
+const StarContainerSm = styled.div<{ duration: number; flowDown: boolean }>`
   position: relative;
   top: -300px;
   left: -50vw;
@@ -768,9 +760,10 @@ const StarContainerSm = styled.div<{ duration: number }>`
     rgb(240 240 240) 119.528px 3306.33px, rgb(240 240 240) 874.712px 461.025px,
     rgb(240 240 240) 2039.81px 3552.81px, rgb(240 240 240) 54.0512px 575.815px,
     rgb(240 240 240) 583.098px 2980.63px, rgb(240 240 240) 2377.52px 2792.93px;
-  ${({ duration }) => css`
-  animation: ${duration}s linear 0s infinite normal none running ${animate}};
-    `}
+  ${({ duration, flowDown }) => css`
+    animation: ${duration}s linear 0s infinite normal none running
+      ${flowDown ? flowDownAnim : flowUpAnim};
+  `}
 
   &::after {
     content: ' ';
