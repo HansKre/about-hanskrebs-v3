@@ -217,10 +217,10 @@ export default function Photography() {
           being creative.
         </h3>
         <h3>
-          Photography and Front End Development both being a real craft both
-          require a lot of practice, dedication and passion. I find it
-          fascinating and infinitely rewarding to look back at own works and see
-          actual progress in skilled craftmanship.
+          Photography and Front End Development both being a real craft require
+          a lot of practice, dedication, time and passion for honing your
+          skills. I find it fascinating and infinitely rewarding to look back at
+          own works and see actual progress in skilled craftmanship.
         </h3>
         <h3>Here are some of my favorite pictures that I took.</h3>
       </Heading>
