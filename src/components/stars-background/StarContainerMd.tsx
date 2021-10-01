@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const animate = keyframes`
 0% {
@@ -9,7 +9,7 @@ const animate = keyframes`
 }
 `;
 
-const StarContainer2 = styled.div`
+const StarContainerMd = styled.div<{ duration: number }>`
   position: relative;
   top: -300px;
   left: -50vw;
@@ -393,7 +393,9 @@ const StarContainer2 = styled.div`
     rgb(240 240 240) 2192.65px 1278.9px, rgb(240 240 240) 19.239px 3204.07px,
     rgb(240 240 240) 1022.37px 453.777px, rgb(240 240 240) 1708px 3587.7px,
     rgb(240 240 240) 48.159px 482.723px, rgb(240 240 240) 3789.79px 2186.1px;
-  animation: 120s linear 0s infinite normal none running ${animate};
+  ${({ duration }) => css`
+  animation: ${duration}s linear 0s infinite normal none running ${animate}};
+    `}
 
   &::after {
     content: ' ';
@@ -780,4 +782,4 @@ const StarContainer2 = styled.div`
   }
 `;
 
-export default StarContainer2;
+export default StarContainerMd;

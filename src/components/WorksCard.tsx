@@ -123,6 +123,7 @@ export default function WorksCard(props: Props & Record<string, any>) {
         ...(backgroundColor && { backgroundColor }),
         ...(background && { background }),
         zIndex,
+        overflow: 'hidden',
       }}
     >
       <Paper elevation={12} className={classes.paper}>
